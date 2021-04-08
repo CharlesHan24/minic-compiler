@@ -7,12 +7,11 @@ enum Node_Type{
     TP_DECL,
     TP_DEF,
     TP_INDEXES,
-    TP_INIT_LIST,
+    TP_INIT_VAL,
     TP_FUNC_DEF,
     TP_FUNC_FPARAM,
     TP_BLOCK,
     TP_STMT,
-    TP_EXP,
     TP_BINARY_OP,
     TP_UNARY_OP,
     TP_FUNC_CALL,
@@ -32,6 +31,7 @@ enum Token_Type{
     TOK_CONTINUE,
     TOK_BREAK,
     TOK_CONST,
+    TOK_NONE,
 };
 
 

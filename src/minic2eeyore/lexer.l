@@ -6,6 +6,8 @@
 #include <errno.h>
 #include "y.tab.h"
 
+int line_no = 1;
+
 // there should be a space or \n
 enum lexer_state{
     LEXER_NML,
@@ -56,6 +58,7 @@ OTHER_TEXT .
     }
 }
 {NEW_LINE} {
+    line_no++;
     if (cur_state == LEXER_SINGLE_LINE_COMMENT){
         cur_state = LEXER_NML;
     }
@@ -119,15 +122,15 @@ OTHER_TEXT .
         yylval.name = strdup(yytext);
         switch (yytext[0]){
             case '+':{
-                return ADDMIN_OP2;
+                return ADDMIN_OP3;
             }
             case '-':{
-                return ADDMIN_OP2;
+                return ADDMIN_OP3;
             }
             case '*':
             case '/':
             case '%':{
-                return MULDIV_OP3;
+                return MULDIV_OP2;
             }
 
             case '!':{

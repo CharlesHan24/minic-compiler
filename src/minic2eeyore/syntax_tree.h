@@ -26,12 +26,14 @@ typedef struct Syntax_Tree{
     int val_from_son;
     unsigned dec_val;
     char* ident_name;
-    char* synt_name;
+    char* op_name;
+    int node_id;
 }Syntax_Tree;
 
-Syntax_Tree* new_node(enum Restriction restric, enum Node_Type node_type, enum Token_Type token_type, 
-    int option, unsigned dec_val, char* ident_name, char* synt_name);
+Syntax_Tree* new_node(enum Restriction restric, enum Node_Type node_type, 
+    int option, enum Token_Type token_type, unsigned dec_val, char* ident_name, char* op_name);
 
 void insert_sons(Syntax_Tree* cur_node, Syntax_Tree* targ_node, int flag);
 
+void print_tree(Syntax_Tree* root)
 #endif
