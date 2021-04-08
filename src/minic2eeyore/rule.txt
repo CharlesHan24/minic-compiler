@@ -1,0 +1,63 @@
+CompUnit      ::= [CompUnit] (Decl | FuncDef);
+Decl          ::= ConstDecl | VarDecl;
+CONST_INDEXES       ::= "["ConstExp"]" [CONST_INDEXES]
+VAR_INDEXES       ::= "["Exp"]" [VAR_INDEXES]
+ConstDecl     ::= "const" "int" ConstDefs ";";
+ConstDefs     ::= ConstDef ["," ConstDefs];
+ConstDef      ::= IDENT [CONST_INDEXES] "=" ConstInitVal;
+ConstInitList ::= ConstInitVal ["," ConstInitList]
+ConstInitVal  ::= ConstExp | "{" [ConstInitList] "}";
+VarDecl       ::= "int" VarDefs ";";
+VarDefs       ::= VarDef ["," VarDefs]   ;
+VarDef        ::= IDENT [CONST_INDEXES]
+                | IDENT [CONST_INDEXES] "=" InitVal;
+InitList      ::= InitVal ["," InitList];
+InitVal       ::= Exp | "{" [InitList] "}";
+FuncDef       ::= FuncType IDENT "(" [FuncFParams] ")" Block;
+FuncType      ::= "void" | "int";
+FuncFParams   ::= FuncFParam ["," FuncFParams];
+FuncFParam    ::= "int" IDENT ["[" "]" [CONST_INDEXES]];
+Block         ::= "{" BlockItems "}";
+BlockItems    ::= BlockItem [BlockItems];
+BlockItem     ::= Decl | Stmt;
+Stmt          ::= LVal "=" Exp ";"
+                | [Exp] ";"
+                | Block
+                | "if" "(" Cond ")" Stmt ["else" Stmt]
+                | "while" "(" Cond ")" Stmt
+                | "break" ";"
+                | "continue" ";"
+                | "return" [Exp] ";";
+Exp           ::= AddExp;
+Cond          ::= LOrExp;
+LVal          ::= IDENT [VAR_INDEXES];
+PrimaryExp    ::= "(" Exp ")" | LVal | Number;
+Number        ::= INT_CONST;
+UnaryExp      ::= PrimaryExp | IDENT "(" [FuncRParams] ")" | UnaryOp UnaryExp;
+UnaryOp       ::= "+" | "-" | "!";
+FuncRParams   ::= Exp ["," FuncRParams];
+MulExp        ::= UnaryExp | MulExp ("*" | "/" | "%") UnaryExp;
+AddExp        ::= MulExp | AddExp ("+" | "-") MulExp;
+RelExp        ::= AddExp | RelExp ("<" | ">" | "<=" | ">=") AddExp;
+EqExp         ::= RelExp | EqExp ("==" | "!=") RelExp;
+LAndExp       ::= EqExp | LAndExp "&&" EqExp;
+LOrExp        ::= LAndExp | LOrExp "||" LAndExp;
+ConstExp      ::= AddExp;
+
+
+建树之后文法可以有二义性, 但因为已经成为了树, 就没有二义性了
+这里不提供报错功能, 总是假定程序的语义正确.
+TP_COMPUNIT       an array of Decl | FuncType
+TP_DECL           (const) int + Array of TP_DEF
+TP_DEF            Ident + (TP_INDEXES) + (= TP_INIT_LIST)
+TP_INDEXES: sons: many (const)exps. each const_exps indicate a dimension
+TP_TOKEN          
+TP_INIT_LIST      two types. One: EXP. Second: {array of TP_INIT_LIST}
+TP_FUNC_DEF       FUNC_TYPE IDENT (TP_FUNC_FPRAM)
+TP_FUNC_FPRAM:    an array of TP_DEF, except that the first dimension could be []
+TP_BLOCK          an array of declaration or statement
+TP_STMT           many options
+TP_EXP            TP_BINARY_OP | TP_UNARY_OP
+TP_BINARY_OP:     TP_EXP OP_TOKEN TP_EXP
+TP_UNARY_OP:      FUNCTION_CALL | Ident TP_INDEXES | UNARY_TOKEN + TP_UNARY_OP
+TP_FUNCTION_CALL: IDENT + TP_FUNC_FPRAM
