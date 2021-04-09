@@ -29,6 +29,5 @@
 # Executables
 *.exe
 *.out
-*.app:wq
-:wq
-
+*.app:
+./open-test-cases/**
