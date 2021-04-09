@@ -12,8 +12,8 @@ enum Node_Type{
     TP_FUNC_FPARAM,
     TP_BLOCK,
     TP_STMT,
-    TP_BINARY_OP,
-    TP_UNARY_OP,
+    TP_BINARY_EXP,
+    TP_UNARY_EXP,
     TP_FUNC_CALL,
     TP_TOKEN,
 };

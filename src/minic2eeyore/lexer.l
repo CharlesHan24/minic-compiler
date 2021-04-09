@@ -6,7 +6,18 @@
 #include <errno.h>
 #include "y.tab.h"
 
-int line_no = 1;
+extern FILE* yyin;
+extern FILE* yyout;
+
+int line_id = 1;
+
+
+#define YY_INPUT(buf, result, max_size) \
+    { \
+    int c = getc(yyin); \
+    result = (c == EOF) ? YY_NULL : (buf[0] = c, 1); \
+    }
+
 
 // there should be a space or \n
 enum lexer_state{
@@ -18,7 +29,7 @@ enum lexer_state{
 
 enum lexer_state cur_state = LEXER_NML;
 
-void yyerror(){
+void print_error(){
     printf("Lexical error\n");
     exit(0);
 }
@@ -54,11 +65,11 @@ OTHER_TEXT .
 
 {SL_COMMENT} {
     if (cur_state != LEXER_MULTI_LINE_COMMENT){
-        cur_state = LEXER_MULTI_LINE_COMMENT;
+        cur_state = LEXER_SINGLE_LINE_COMMENT;
     }
 }
 {NEW_LINE} {
-    line_no++;
+    line_id++;
     if (cur_state == LEXER_SINGLE_LINE_COMMENT){
         cur_state = LEXER_NML;
     }
@@ -73,7 +84,7 @@ OTHER_TEXT .
 }
 {ML_COMMENT_BGN} {
     if (cur_state != LEXER_SINGLE_LINE_COMMENT){
-        cur_state = LEXER_SINGLE_LINE_COMMENT;
+        cur_state = LEXER_MULTI_LINE_COMMENT;
     }
 }
 {ML_COMMENT_END} {
@@ -81,14 +92,14 @@ OTHER_TEXT .
         cur_state = LEXER_NML;
     }
     else if (cur_state != LEXER_SINGLE_LINE_COMMENT){
-        yyerror();
+        print_error();
     }
 }
 
 {KEYWORD} {
     if (!is_comment()){
         if (cur_state == LEXER_NEW_NUM){
-            yyerror();
+            print_error();
         }
         yylval.name = strdup(yytext);
         switch (yytext[0]){
@@ -98,19 +109,19 @@ OTHER_TEXT .
             case 'b':{
                 return BREAK;
             }
-            case 'E':{
+            case 'e':{
                 return ELSE;
             }
-            case 'V':{
+            case 'v':{
                 return VOID;
             }
-            case 'R':{
+            case 'r':{
                 return RETURN;
             }
-            case 'C':{
+            case 'c':{
                 return yyleng == 8? CONTINUE: CONST;
             }
-            case 'I':{
+            case 'i':{
                 return yyleng == 2? IF: INT;
             }
         }
@@ -141,10 +152,10 @@ OTHER_TEXT .
                 return COMP_OP4;
             }
             case '|':{
-                return OR_OP6;
+                return OR_OP7;
             }
             case '&':{
-                return AND_OP7;
+                return AND_OP6;
             }
             case '=':{
                 return yyleng == 1? ASSIGN_OP8: EQUAL_OP5;
@@ -192,7 +203,7 @@ OTHER_TEXT .
         if ((yytext[0] == '0') && ((yytext[1] == 'x') || (yytext[1] == 'X'))){
             base = 16;
         }
-        else if (yytext == '0'){
+        else if (yytext[0] == '0'){
             base = 8;
         }
         else{
@@ -200,12 +211,12 @@ OTHER_TEXT .
         }
         res = strtol(yytext, NULL, base);
         if ((errno == ERANGE) || (errno == EINVAL)){
-            yyerror();
+            print_error();
         }
         if (res > (1l << 32)){
-            yyerror();
+            print_error();
         }
-        yylval.value = res;
+        yylval.val = res;
         if (cur_state == LEXER_NML){
             cur_state = LEXER_NEW_NUM;
         }
@@ -215,23 +226,50 @@ OTHER_TEXT .
 
 {VARIABLE} {
     if (!is_comment()){
+        long cur_pos;
+        cur_pos = ftell(yyin);
+        cur_pos -= 1;
+        fseek(yyin, cur_pos, SEEK_SET);
+        char tmp;
+        int meet_lpar = 0;
+        while (1){
+            if (fscanf(yyin, "%c", &tmp) == EOF){
+                break;
+            }
+            
+            if (tmp == '('){
+                meet_lpar = 1;
+                break;
+            }
+            if ((tmp != '\n') && (tmp != ' ')){
+                break;
+            }
+        }
+
         if (cur_state == LEXER_NEW_NUM){
-            yyerror();
+            print_error();
         }
         yylval.name = strdup(yytext);
-        return IDENT;
+
+        if (meet_lpar != 1){
+            fseek(yyin, cur_pos + 1, SEEK_SET);
+            
+            return IDENT;
+        }        
+        yy_flush_buffer(*yy_buffer_stack);
+        return IDENT_FUNC;
     }
 }
 
 {OTHER_TEXT} {
     if (!is_comment()){
-        yyerror();
+        print_error();
     }
 }
 
 %%
-
+/*
 int main(){
     yylex();
     return 0;
-}
+}*/

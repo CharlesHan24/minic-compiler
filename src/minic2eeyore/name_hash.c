@@ -4,7 +4,7 @@
 
 static int hash_base = 233;
 
-Hash_Buc* hash_table[TABLE_SIZE];
+Hash_Bucket* hash_table[TABLE_SIZE];
 
 int calc_hash(char* name){
     int len = strlen(name);
@@ -15,10 +15,10 @@ int calc_hash(char* name){
     return hash_val;
 }
 
-Hash_Buc* hash_insert_key(char* name){
+Hash_Bucket* hash_insert_key(char* name){
     int hash_val = calc_hash(name);
-    Hash_Buc* ret = NULL;
-    Hash_Buc* cur_node;
+    Hash_Bucket* ret = NULL;
+    Hash_Bucket* cur_node;
     for (cur_node = hash_table[hash_val]; cur_node != NULL; cur_node = cur_node->next){
         if (strcmp(cur_node->name, name) == 0){
             ret = cur_node;
@@ -26,7 +26,7 @@ Hash_Buc* hash_insert_key(char* name){
         }
     }
     if (ret == NULL){
-        ret = malloc(sizeof(Hash_Buc));
+        ret = malloc(sizeof(Hash_Bucket));
         ret->next = hash_table[hash_val];
         hash_table[hash_val] = ret;
         ret->count++;
@@ -38,8 +38,8 @@ Hash_Buc* hash_insert_key(char* name){
 
 void hash_table_clear(){
     for (int i = 0; i < TABLE_SIZE; i++){
-        Hash_Buc* cur_node = hash_table[i];
-        Hash_Buc* nxt_node;
+        Hash_Bucket* cur_node = hash_table[i];
+        Hash_Bucket* nxt_node;
         for(; cur_node != NULL; cur_node = nxt_node){
             nxt_node = cur_node->next;
             free(cur_node->name);
@@ -48,10 +48,10 @@ void hash_table_clear(){
     }
 }
 
-Hash_Buc* hash_find_buc(char* name){
+Hash_Bucket* hash_find_buc(char* name){
     int hash_val = calc_hash(name);
-    Hash_Buc* ret = NULL;
-    Hash_Buc* cur_node;
+    Hash_Bucket* ret = NULL;
+    Hash_Bucket* cur_node;
     for (cur_node = hash_table[hash_val]; cur_node != NULL; cur_node = cur_node->next){
         if (strcmp(cur_node->name, name) == 0){
             ret = cur_node;

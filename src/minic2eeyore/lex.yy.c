@@ -499,7 +499,18 @@ char *yytext;
 #include <errno.h>
 #include "y.tab.h"
 
-int line_no = 1;
+extern FILE* yyin;
+extern FILE* yyout;
+
+int line_id = 1;
+
+
+#define YY_INPUT(buf, result, max_size) \
+    { \
+    int c = getc(yyin); \
+    result = (c == EOF) ? YY_NULL : (buf[0] = c, 1); \
+    }
+
 
 // there should be a space or \n
 enum lexer_state{
@@ -511,7 +522,7 @@ enum lexer_state{
 
 enum lexer_state cur_state = LEXER_NML;
 
-void yyerror(){
+void print_error(){
     printf("Lexical error\n");
     exit(0);
 }
@@ -526,8 +537,8 @@ int is_comment(){
     return (cur_state == LEXER_MULTI_LINE_COMMENT) || (cur_state == LEXER_SINGLE_LINE_COMMENT);
 }
 
-#line 530 "lex.yy.c"
-#line 531 "lex.yy.c"
+#line 541 "lex.yy.c"
+#line 542 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -744,10 +755,10 @@ YY_DECL
 		}
 
 	{
-#line 53 "lexer.l"
+#line 64 "lexer.l"
 
 
-#line 751 "lex.yy.c"
+#line 762 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -806,19 +817,19 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 55 "lexer.l"
+#line 66 "lexer.l"
 {
     if (cur_state != LEXER_MULTI_LINE_COMMENT){
-        cur_state = LEXER_MULTI_LINE_COMMENT;
+        cur_state = LEXER_SINGLE_LINE_COMMENT;
     }
 }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 60 "lexer.l"
+#line 71 "lexer.l"
 {
-    line_no++;
+    line_id++;
     if (cur_state == LEXER_SINGLE_LINE_COMMENT){
         cur_state = LEXER_NML;
     }
@@ -829,7 +840,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 69 "lexer.l"
+#line 80 "lexer.l"
 {
     if (cur_state == LEXER_NEW_NUM){
         reset_lexer_state();
@@ -838,32 +849,32 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 74 "lexer.l"
+#line 85 "lexer.l"
 {
     if (cur_state != LEXER_SINGLE_LINE_COMMENT){
-        cur_state = LEXER_SINGLE_LINE_COMMENT;
+        cur_state = LEXER_MULTI_LINE_COMMENT;
     }
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 79 "lexer.l"
+#line 90 "lexer.l"
 {
     if (cur_state == LEXER_MULTI_LINE_COMMENT){
         cur_state = LEXER_NML;
     }
     else if (cur_state != LEXER_SINGLE_LINE_COMMENT){
-        yyerror();
+        print_error();
     }
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 88 "lexer.l"
+#line 99 "lexer.l"
 {
     if (!is_comment()){
         if (cur_state == LEXER_NEW_NUM){
-            yyerror();
+            print_error();
         }
         yylval.name = strdup(yytext);
         switch (yytext[0]){
@@ -873,19 +884,19 @@ YY_RULE_SETUP
             case 'b':{
                 return BREAK;
             }
-            case 'E':{
+            case 'e':{
                 return ELSE;
             }
-            case 'V':{
+            case 'v':{
                 return VOID;
             }
-            case 'R':{
+            case 'r':{
                 return RETURN;
             }
-            case 'C':{
+            case 'c':{
                 return yyleng == 8? CONTINUE: CONST;
             }
-            case 'I':{
+            case 'i':{
                 return yyleng == 2? IF: INT;
             }
         }
@@ -894,7 +905,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 119 "lexer.l"
+#line 130 "lexer.l"
 {
     if (!is_comment()){
         reset_lexer_state();
@@ -920,10 +931,10 @@ YY_RULE_SETUP
                 return COMP_OP4;
             }
             case '|':{
-                return OR_OP6;
+                return OR_OP7;
             }
             case '&':{
-                return AND_OP7;
+                return AND_OP6;
             }
             case '=':{
                 return yyleng == 1? ASSIGN_OP8: EQUAL_OP5;
@@ -934,7 +945,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 156 "lexer.l"
+#line 167 "lexer.l"
 {
     if (!is_comment()){
         reset_lexer_state();
@@ -970,7 +981,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 188 "lexer.l"
+#line 199 "lexer.l"
 {
     if (!is_comment()){
         long long res;
@@ -978,7 +989,7 @@ YY_RULE_SETUP
         if ((yytext[0] == '0') && ((yytext[1] == 'x') || (yytext[1] == 'X'))){
             base = 16;
         }
-        else if (yytext == '0'){
+        else if (yytext[0] == '0'){
             base = 8;
         }
         else{
@@ -986,12 +997,12 @@ YY_RULE_SETUP
         }
         res = strtol(yytext, NULL, base);
         if ((errno == ERANGE) || (errno == EINVAL)){
-            yyerror();
+            print_error();
         }
         if (res > (1l << 32)){
-            yyerror();
+            print_error();
         }
-        yylval.value = res;
+        yylval.val = res;
         if (cur_state == LEXER_NML){
             cur_state = LEXER_NEW_NUM;
         }
@@ -1001,32 +1012,59 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 216 "lexer.l"
+#line 227 "lexer.l"
 {
     if (!is_comment()){
+        long cur_pos;
+        cur_pos = ftell(yyin);
+        cur_pos -= 1;
+        fseek(yyin, cur_pos, SEEK_SET);
+        char tmp;
+        int meet_lpar = 0;
+        while (1){
+            if (fscanf(yyin, "%c", &tmp) == EOF){
+                break;
+            }
+            
+            if (tmp == '('){
+                meet_lpar = 1;
+                break;
+            }
+            if ((tmp != '\n') && (tmp != ' ')){
+                break;
+            }
+        }
+
         if (cur_state == LEXER_NEW_NUM){
-            yyerror();
+            print_error();
         }
         yylval.name = strdup(yytext);
-        return IDENT;
+
+        if (meet_lpar != 1){
+            fseek(yyin, cur_pos + 1, SEEK_SET);
+            
+            return IDENT;
+        }        
+        yy_flush_buffer(*yy_buffer_stack);
+        return IDENT_FUNC;
     }
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 226 "lexer.l"
+#line 264 "lexer.l"
 {
     if (!is_comment()){
-        yyerror();
+        print_error();
     }
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 232 "lexer.l"
+#line 270 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 1030 "lex.yy.c"
+#line 1068 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2031,10 +2069,10 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 232 "lexer.l"
+#line 270 "lexer.l"
 
-
+/*
 int main(){
     yylex();
     return 0;
-}
+}*/

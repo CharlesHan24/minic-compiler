@@ -7,22 +7,34 @@
 #include "./syntax_tree.h"
 #include "./name_hash.h"
 
+//int yydebug = 1;
+extern FILE* yyin;
+extern FILE* yyout;
 
-extern int line_no;
+extern int yylex();
+extern int line_id;
 
-syntax_tree* tree_root;
+Syntax_Tree* tree_root;
 
-void yyerror(const char* s){
-    fprintf(stderr, "Error at line #%d: %s\n", line_no, s);
+
+void yyerror(char* s){
+    fprintf(stderr, "Error at line #%d: %s\n", line_id, s);
     exit(0);
 }
 
 %}
+//%define parse.error verbose
+
+%union {
+	unsigned val;
+	char* name;
+	struct Syntax_Tree* node;
+};
 
 %token <name> IF ELSE WHILE CONTINUE BREAK RETURN INT VOID CONST
 %token <name> L_PAR R_PAR L_SBRAC R_SBRAC L_CBRAC R_CBRAC COMMA COLON   // ( ) [ ] { } , ;
-%token <value> DECIMAL_TOK
-%token <name> IDENT 
+%token <val> DECIMAL_TOK
+%token <name> IDENT IDENT_FUNC
 
 %left <name> NOT_OP1   // !
 %left <name> MULDIV_OP2   // + -
@@ -38,7 +50,7 @@ void yyerror(const char* s){
 %type <node> CONST_INIT_VAL VAR_DECL VAR_DEFS VAR_DEF INIT_LIST INIT_VAL FUNC_DEF FUNC_TYPE 
 %type <node> FUNC_FPARAMS FUNC_FPARAM BLOCK BLOCK_ITEMS BLOCK_ITEM STMT EXP COND LVAL PRIMARY_EXP
 %type <node> UNARY_EXP UNARY_OP FUNC_RPARAMS MUL_EXP ADD_EXP REL_EXP EQ_EXP LAND_EXP LOR_EXP CONST_EXP 
-%type <node> INTEGER IDENTIFIER
+%type <node> INTEGER IDENTIFIER IDENTIFIER_FUNC
 
 %%
 COMP_UNIT:  DECL 
@@ -66,8 +78,8 @@ COMP_UNIT:  DECL
             insert_sons($$, $1, 0);
         }
 ;
-DECL:       CONST_DECL {$$ = $1}
-    |       VAR_DECL   {$$ = $1}
+DECL:       CONST_DECL {$$ = $1;}
+    |       VAR_DECL   {$$ = $1;}
 ;
 CONST_INDEXES: L_SBRAC CONST_EXP R_SBRAC
         {
@@ -107,14 +119,12 @@ CONST_DEF: IDENTIFIER ASSIGN_OP8 CONST_INIT_VAL
         {
             $$ = new_node(CONST_REST, TP_DEF, 1, 0, 0, NULL, $2);
             insert_sons($$, $3, 0);
-            insert_sons($$, $2, 0);
             insert_sons($$, $1, 0);
         }
     |      IDENTIFIER CONST_INDEXES ASSIGN_OP8 CONST_INIT_VAL
         {
             $$ = new_node(CONST_REST, TP_DEF, 3, 0, 0, NULL, $3);
             insert_sons($$, $4, 0);
-            insert_sons($$, $3, 0);
             insert_sons($$, $2, 0);
             insert_sons($$, $1, 0);
         }
@@ -161,14 +171,12 @@ VAR_DEF: IDENTIFIER ASSIGN_OP8 INIT_VAL
         {
             $$ = new_node(NONCONST_REST, TP_DEF, 1, 0, 0, NULL, $2);
             insert_sons($$, $3, 0);
-            insert_sons($$, $2, 0);
             insert_sons($$, $1, 0);
         }
     |      IDENTIFIER CONST_INDEXES ASSIGN_OP8 INIT_VAL
         {
             $$ = new_node(NONCONST_REST, TP_DEF, 3, 0, 0, NULL, $3);
             insert_sons($$, $4, 0);
-            insert_sons($$, $3, 0);
             insert_sons($$, $2, 0);
             insert_sons($$, $1, 0);
         }
@@ -209,18 +217,18 @@ INIT_LIST:  INIT_VAL
             insert_sons($$, $1, 0);
         }
 ;
-FUNC_DEF:   FUNC_TYPE IDENTIFIER L_PAR R_PAR BLOCK
+FUNC_DEF:   FUNC_TYPE IDENTIFIER_FUNC R_PAR BLOCK
         {
             $$ = new_node(NONCONST_REST, TP_FUNC_DEF, 0, 0, 0, NULL, NULL);
-            insert_sons($$, $5, 0);
+            insert_sons($$, $4, 0);
             insert_sons($$, $2, 0);
             insert_sons($$, $1, 0);
         }
-    |       FUNC_TYPE IDENTIFIER L_PAR FUNC_FPARAMS R_PAR BLOCK
+    |       FUNC_TYPE IDENTIFIER_FUNC FUNC_FPARAMS R_PAR BLOCK
         {
             $$ = new_node(NONCONST_REST, TP_FUNC_DEF, 1, 0, 0, NULL, NULL);
-            insert_sons($$, $6, 0);
-            insert_sons($$, $4, 0);
+            insert_sons($$, $5, 0);
+            insert_sons($$, $3, 0);
             insert_sons($$, $2, 0);
             insert_sons($$, $1, 0);
         }
@@ -236,39 +244,39 @@ FUNC_TYPE:   INT
 ;
 FUNC_FPARAMS: FUNC_FPARAM
         {
-            $$ = new_node(NONCONST_REST, TP_FUNC_FPRAM, 0, 0, 0, NULL, NULL);
+            $$ = new_node(NONCONST_REST, TP_FUNC_FPARAM, 0, 0, 0, NULL, NULL);
             insert_sons($$, $1, 0);
         }
     |        FUNC_FPARAM COMMA FUNC_FPARAMS
         {
-            $$ = $2;
+            $$ = $3;
             insert_sons($$, $1, 0);
         }
 ;
 FUNC_FPARAM:  INT IDENTIFIER
         {
             $$ = new_node(NONCONST_REST, TP_DEF, 0, 0, 0, NULL, NULL);
-            insert($$, $2, 0);
+            insert_sons($$, $2, 0);
         }
     |         INT IDENTIFIER L_SBRAC R_SBRAC
         {
             $$ = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
-            syntax_tree* tmp_node = new_node(NONCONST_REST, TP_INDEXES, 1, 0, 0, NULL, NULL);
-            insert($$, tmp_node, 0);
-            insert($$, $2, 0);
+            Syntax_Tree* tmp_node = new_node(NONCONST_REST, TP_INDEXES, 1, 0, 0, NULL, NULL);
+            insert_sons($$, tmp_node, 0);
+            insert_sons($$, $2, 0);
         }
     |         INT IDENTIFIER CONST_INDEXES
         {
             $$ = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
-            insert($$, $3, 0);
-            insert($$, $2, 0);
+            insert_sons($$, $3, 0);
+            insert_sons($$, $2, 0);
         }
     |         INT IDENTIFIER L_SBRAC R_SBRAC CONST_INDEXES
         {
             $$ = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
-            $3->option = 1;
-            insert($$, $3, 0);
-            insert($$, $2, 0);
+            $5->option = 1;
+            insert_sons($$, $5, 0);
+            insert_sons($$, $2, 0);
         }
 ;
 BLOCK:     L_CBRAC BLOCK_ITEMS R_CBRAC
@@ -279,6 +287,7 @@ BLOCK:     L_CBRAC BLOCK_ITEMS R_CBRAC
 BLOCK_ITEMS:   BLOCK_ITEM
         {
             $$ = new_node(NONCONST_REST, TP_BLOCK, 0, 0, 0, NULL, NULL);
+            insert_sons($$, $1, 0);
         }
     |          BLOCK_ITEM BLOCK_ITEMS
         {
@@ -297,7 +306,6 @@ STMT:    COLON
         {
             $$ = new_node(NONCONST_REST, TP_STMT, 0, 0, 0, NULL, $2);
             insert_sons($$, $3, 0);
-            insert_sons($$, $2, 0);
             insert_sons($$, $1, 0);
         }
     |   EXP
@@ -368,14 +376,14 @@ MUL_EXP:   UNARY_EXP {$$ = $1;}
         }
 ;
 UNARY_EXP: PRIMARY_EXP {$$ = $1;}
-    |      IDENTIFIER   L_PAR R_PAR 
+    |      IDENTIFIER_FUNC R_PAR 
         {
             $$ = new_node(NONCONST_REST, TP_FUNC_CALL, 0, 0, 0, NULL, NULL);
             insert_sons($$, $1, 0);
         }
-    |      IDENTIFIER   L_PAR FUNC_RPARAMS R_PAR
+    |      IDENTIFIER_FUNC FUNC_RPARAMS R_PAR
         {
-            $$ = $3;
+            $$ = $2;
             insert_sons($$, $1, 0);
         }
     |      UNARY_OP UNARY_EXP
@@ -416,6 +424,11 @@ LVAL:       IDENTIFIER VAR_INDEXES
             insert_sons($$, $2, 0);
             insert_sons($$, $1, 0);
         }
+    |
+            IDENTIFIER
+        {
+            $$ = $1;
+        }
 ;
 REL_EXP:     ADD_EXP {$$ = $1;}
     |       REL_EXP COMP_OP4 ADD_EXP
@@ -453,6 +466,10 @@ LOR_EXP:    LAND_EXP {$$ = $1;}
 ;
 INTEGER:    DECIMAL_TOK
         {
+            if ($1 == 444){
+                $1++;
+                $1--;
+            }
             $$ = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_DEC, $1, NULL, NULL);
         }
 ;
@@ -461,19 +478,25 @@ IDENTIFIER:    IDENT
             $$ = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_IDENT, 0, $1, NULL);
         }
 ;
+IDENTIFIER_FUNC:    IDENT_FUNC
+        {
+            $$ = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_IDENT, 0, $1, NULL);
+        }
+;
 
 %%
 
-int main(int argc, char* argv){
+int main(int argc, char* argv[]){
     if (argc != 2){
         printf("Usage: ./parser TARGET_FILE\n");
         return 0;
     }
     FILE* inp_file = fopen(argv[1], "r");
+    printf("%s\n", argv[1]);
     yyin = inp_file;
 
     tree_root = NULL;
     yyparse();
-    print_tree(root);
+    print_tree(tree_root);
     return 0;
 }

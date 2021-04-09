@@ -1,0 +1,540 @@
+../../data/example.c
+ID: 1, Type: COMP_UNIT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 2 7 10 64 108 113 130 174 373 
+ID: 2, Type: DECL Option: 0, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 3 
+ID: 3, Type: DEF Option: 1, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 4 5 
+ID: 4, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 5, Type: INIT_VAL Option: 0, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 6 
+ID: 6, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 998244353, ident_name: (null), op_name: (null) 
+ID: 7, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 8 
+ID: 8, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 9 
+ID: 9, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 10, Type: FUNC_DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 11 12 13 18 
+ID: 11, Type: TOKEN Option: 0, const_or_not: 0, token_type: 3, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 12, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 13, Type: FUNC_FPARAM Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 14 16 
+ID: 14, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 15 
+ID: 15, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 16, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 17 
+ID: 17, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 18, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 19 25 33 43 50 
+ID: 19, Type: STMT Option: 3, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 20 23 
+ID: 20, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: == 21 22 
+ID: 21, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 22, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 23, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 24 
+ID: 24, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 25, Type: STMT Option: 3, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 26 29 
+ID: 26, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: == 27 28 
+ID: 27, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 28, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 29, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 30 
+ID: 30, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: % 31 32 
+ID: 31, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 32, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 33, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 34 
+ID: 34, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 35 36 
+ID: 35, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 36, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 37 
+ID: 37, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 38 39 40 
+ID: 38, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 39, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 40, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 41 42 
+ID: 41, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 42, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 43, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 44 45 
+ID: 44, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 45, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: % 46 49 
+ID: 46, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 47 48 
+ID: 47, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 48, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 49, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 50, Type: STMT Option: 4, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 51 56 62 
+ID: 51, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: == 52 55 
+ID: 52, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: % 53 54 
+ID: 53, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 54, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 55, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 56, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 57 
+ID: 57, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: % 58 61 
+ID: 58, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 59 60 
+ID: 59, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 60, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 61, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 62, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 63 
+ID: 63, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 64, Type: FUNC_DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 65 66 67 72 
+ID: 65, Type: TOKEN Option: 0, const_or_not: 0, token_type: 3, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 66, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: power, op_name: (null) 
+ID: 67, Type: FUNC_FPARAM Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 68 70 
+ID: 68, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 69 
+ID: 69, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 70, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 71 
+ID: 71, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 72, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 73 79 89 95 
+ID: 73, Type: STMT Option: 3, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 74 77 
+ID: 74, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: == 75 76 
+ID: 75, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 76, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 77, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 78 
+ID: 78, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 79, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 80 
+ID: 80, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 81 82 
+ID: 81, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 82, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 83 
+ID: 83, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 84 85 86 
+ID: 84, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: power, op_name: (null) 
+ID: 85, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 86, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 87 88 
+ID: 87, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 88, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 89, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 90 91 
+ID: 90, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 91, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 92 93 94 
+ID: 92, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 93, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 94, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 95, Type: STMT Option: 4, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 96 101 106 
+ID: 96, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: == 97 100 
+ID: 97, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: % 98 99 
+ID: 98, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 99, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 100, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 101, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 102 
+ID: 102, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 103 104 105 
+ID: 103, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 104, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 105, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 106, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 107 
+ID: 107, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: cur, op_name: (null) 
+ID: 108, Type: DECL Option: 0, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 109 
+ID: 109, Type: DEF Option: 1, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 110 111 
+ID: 110, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: maxlen, op_name: (null) 
+ID: 111, Type: INIT_VAL Option: 0, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 112 
+ID: 112, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2097152, ident_name: (null), op_name: (null) 
+ID: 113, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 114 118 122 126 
+ID: 114, Type: DEF Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 115 116 
+ID: 115, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: temp, op_name: (null) 
+ID: 116, Type: INDEXES Option: 0, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 117 
+ID: 117, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: maxlen, op_name: (null) 
+ID: 118, Type: DEF Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 119 120 
+ID: 119, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 120, Type: INDEXES Option: 0, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 121 
+ID: 121, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: maxlen, op_name: (null) 
+ID: 122, Type: DEF Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 123 124 
+ID: 123, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 124, Type: INDEXES Option: 0, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 125 
+ID: 125, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: maxlen, op_name: (null) 
+ID: 126, Type: DEF Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 127 128 
+ID: 127, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: c, op_name: (null) 
+ID: 128, Type: INDEXES Option: 0, const_or_not: 1, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 129 
+ID: 129, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: maxlen, op_name: (null) 
+ID: 130, Type: FUNC_DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 131 132 133 144 
+ID: 131, Type: TOKEN Option: 0, const_or_not: 0, token_type: 3, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 132, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: memmove, op_name: (null) 
+ID: 133, Type: FUNC_FPARAM Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 134 137 139 142 
+ID: 134, Type: DEF Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 135 136 
+ID: 135, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: dst, op_name: (null) 
+ID: 136, Type: INDEXES Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 137, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 138 
+ID: 138, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: dst_pos, op_name: (null) 
+ID: 139, Type: DEF Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 140 141 
+ID: 140, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: src, op_name: (null) 
+ID: 141, Type: INDEXES Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 142, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 143 
+ID: 143, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: len, op_name: (null) 
+ID: 144, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 145 150 172 
+ID: 145, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 146 
+ID: 146, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 147 148 
+ID: 147, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 148, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 149 
+ID: 149, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 150, Type: STMT Option: 5, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 151 154 
+ID: 151, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: < 152 153 
+ID: 152, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 153, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: len, op_name: (null) 
+ID: 154, Type: STMT Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 155 
+ID: 155, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 156 167 
+ID: 156, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 157 163 
+ID: 157, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 158 159 
+ID: 158, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: dst, op_name: (null) 
+ID: 159, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 160 
+ID: 160, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 161 162 
+ID: 161, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: dst_pos, op_name: (null) 
+ID: 162, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 163, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 164 165 
+ID: 164, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: src, op_name: (null) 
+ID: 165, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 166 
+ID: 166, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 167, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 168 169 
+ID: 168, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 169, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 170 171 
+ID: 170, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 171, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 172, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 173 
+ID: 173, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 174, Type: FUNC_DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 175 176 177 187 
+ID: 175, Type: TOKEN Option: 0, const_or_not: 0, token_type: 3, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 176, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: fft, op_name: (null) 
+ID: 177, Type: FUNC_FPARAM Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 178 181 183 185 
+ID: 178, Type: DEF Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 179 180 
+ID: 179, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 180, Type: INDEXES Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 181, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 182 
+ID: 182, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 183, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 184 
+ID: 184, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 185, Type: DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 186 
+ID: 186, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: w, op_name: (null) 
+ID: 187, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 188 194 199 246 253 254 266 267 283 284 287 292 371 
+ID: 188, Type: STMT Option: 3, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 189 192 
+ID: 189, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: == 190 191 
+ID: 190, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 191, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 192, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 193 
+ID: 193, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 194, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 195 
+ID: 195, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 196 197 
+ID: 196, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 197, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 198 
+ID: 198, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 199, Type: STMT Option: 5, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 200 203 
+ID: 200, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: < 201 202 
+ID: 201, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 202, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 203, Type: STMT Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 204 
+ID: 204, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 205 241 
+ID: 205, Type: STMT Option: 4, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 206 211 224 
+ID: 206, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: == 207 210 
+ID: 207, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: % 208 209 
+ID: 208, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 209, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 210, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 211, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 212 218 
+ID: 212, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 213 214 
+ID: 213, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: temp, op_name: (null) 
+ID: 214, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 215 
+ID: 215, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 216 217 
+ID: 216, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 217, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 218, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 219 220 
+ID: 219, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 220, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 221 
+ID: 221, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 222 223 
+ID: 222, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 223, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 224, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 225 235 
+ID: 225, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 226 227 
+ID: 226, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: temp, op_name: (null) 
+ID: 227, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 228 
+ID: 228, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 229 232 
+ID: 229, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 230 231 
+ID: 230, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 231, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 232, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 233 234 
+ID: 233, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 234, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 235, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 236 237 
+ID: 236, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 237, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 238 
+ID: 238, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 239 240 
+ID: 239, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 240, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 241, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 242 243 
+ID: 242, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 243, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 244 245 
+ID: 244, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 245, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 246, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 247 
+ID: 247, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 248 249 250 251 252 
+ID: 248, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: memmove, op_name: (null) 
+ID: 249, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 250, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 251, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: temp, op_name: (null) 
+ID: 252, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 253, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 254, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 255 
+ID: 255, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 256 257 258 259 262 
+ID: 256, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: fft, op_name: (null) 
+ID: 257, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 258, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 259, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 260 261 
+ID: 260, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 261, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 262, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 263 264 265 
+ID: 263, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 264, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: w, op_name: (null) 
+ID: 265, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: w, op_name: (null) 
+ID: 266, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 267, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 268 
+ID: 268, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 269 270 271 276 279 
+ID: 269, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: fft, op_name: (null) 
+ID: 270, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 271, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 272 273 
+ID: 272, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 273, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 274 275 
+ID: 274, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 275, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 276, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 277 278 
+ID: 277, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 278, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 279, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 280 281 282 
+ID: 280, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 281, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: w, op_name: (null) 
+ID: 282, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: w, op_name: (null) 
+ID: 283, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 284, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 285 286 
+ID: 285, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 286, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 287, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 288 
+ID: 288, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 289 290 
+ID: 289, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: wn, op_name: (null) 
+ID: 290, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 291 
+ID: 291, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 292, Type: STMT Option: 5, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 293 298 
+ID: 293, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: < 294 295 
+ID: 294, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 295, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 296 297 
+ID: 296, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 297, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 298, Type: STMT Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 299 
+ID: 299, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 300 310 324 339 360 366 
+ID: 300, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 301 
+ID: 301, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 302 303 
+ID: 302, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: x, op_name: (null) 
+ID: 303, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 304 
+ID: 304, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 305 306 
+ID: 305, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 306, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 307 
+ID: 307, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 308 309 
+ID: 308, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 309, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 310, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 311 
+ID: 311, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 312 313 
+ID: 312, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: y, op_name: (null) 
+ID: 313, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 314 
+ID: 314, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 315 316 
+ID: 315, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 316, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 317 
+ID: 317, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 318 321 
+ID: 318, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 319 320 
+ID: 319, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 320, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 321, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 322 323 
+ID: 322, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 323, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 324, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 325 331 
+ID: 325, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 326 327 
+ID: 326, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 327, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 328 
+ID: 328, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 329 330 
+ID: 329, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 330, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 331, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: % 332 338 
+ID: 332, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 333 334 
+ID: 333, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: x, op_name: (null) 
+ID: 334, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 335 336 337 
+ID: 335, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 336, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: wn, op_name: (null) 
+ID: 337, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: y, op_name: (null) 
+ID: 338, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 339, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 340 350 
+ID: 340, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 341 342 
+ID: 341, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: arr, op_name: (null) 
+ID: 342, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 343 
+ID: 343, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 344 347 
+ID: 344, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 345 346 
+ID: 345, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: begin_pos, op_name: (null) 
+ID: 346, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 347, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 348 349 
+ID: 348, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 349, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 350, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: % 351 359 
+ID: 351, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 352 358 
+ID: 352, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 353 354 
+ID: 353, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: x, op_name: (null) 
+ID: 354, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 355 356 357 
+ID: 355, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 356, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: wn, op_name: (null) 
+ID: 357, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: y, op_name: (null) 
+ID: 358, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 359, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 360, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 361 362 
+ID: 361, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: wn, op_name: (null) 
+ID: 362, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 363 364 365 
+ID: 363, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 364, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: wn, op_name: (null) 
+ID: 365, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: w, op_name: (null) 
+ID: 366, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 367 368 
+ID: 367, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 368, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 369 370 
+ID: 369, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 370, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 371, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 372 
+ID: 372, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 373, Type: FUNC_DEF Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 374 375 376 
+ID: 374, Type: TOKEN Option: 0, const_or_not: 0, token_type: 3, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 375, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: main, op_name: (null) 
+ID: 376, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 377 384 391 394 395 398 413 427 428 442 443 448 474 492 493 496 524 527 528 537 538 
+ID: 377, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 378 
+ID: 378, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 379 380 
+ID: 379, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 380, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 381 
+ID: 381, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 382 383 
+ID: 382, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: getarray, op_name: (null) 
+ID: 383, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 384, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 385 
+ID: 385, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 386 387 
+ID: 386, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: m, op_name: (null) 
+ID: 387, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 388 
+ID: 388, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 389 390 
+ID: 389, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: getarray, op_name: (null) 
+ID: 390, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 391, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 392 
+ID: 392, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 393 
+ID: 393, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: starttime, op_name: (null) 
+ID: 394, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 395, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 396 397 
+ID: 396, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 397, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 398, Type: STMT Option: 5, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 399 406 
+ID: 399, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: < 400 401 
+ID: 400, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 401, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 402 405 
+ID: 402, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 403 404 
+ID: 403, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 404, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: m, op_name: (null) 
+ID: 405, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 406, Type: STMT Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 407 
+ID: 407, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 408 
+ID: 408, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 409 410 
+ID: 409, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 410, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: * 411 412 
+ID: 411, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 412, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 413, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 414 
+ID: 414, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 415 416 417 418 419 
+ID: 415, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: fft, op_name: (null) 
+ID: 416, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 417, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 418, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 419, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 420 421 422 
+ID: 420, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: power, op_name: (null) 
+ID: 421, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 3, ident_name: (null), op_name: (null) 
+ID: 422, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 423 426 
+ID: 423, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 424 425 
+ID: 424, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 425, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 426, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 427, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 428, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 429 
+ID: 429, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 430 431 432 433 434 
+ID: 430, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: fft, op_name: (null) 
+ID: 431, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 432, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 433, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 434, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 435 436 437 
+ID: 435, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: power, op_name: (null) 
+ID: 436, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 3, ident_name: (null), op_name: (null) 
+ID: 437, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 438 441 
+ID: 438, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 439 440 
+ID: 439, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 440, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 441, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 442, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 443, Type: DECL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 444 
+ID: 444, Type: DEF Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 445 446 
+ID: 445, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 446, Type: INIT_VAL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 447 
+ID: 447, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 448, Type: STMT Option: 5, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 449 452 
+ID: 449, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: < 450 451 
+ID: 450, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 451, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 452, Type: STMT Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 453 
+ID: 453, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 454 469 
+ID: 454, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 455 459 
+ID: 455, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 456 457 
+ID: 456, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 457, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 458 
+ID: 458, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 459, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 460 461 465 
+ID: 460, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 461, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 462 463 
+ID: 462, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 463, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 464 
+ID: 464, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 465, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 466 467 
+ID: 466, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: b, op_name: (null) 
+ID: 467, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 468 
+ID: 468, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 469, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 470 471 
+ID: 470, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 471, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 472 473 
+ID: 472, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 473, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 474, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 475 
+ID: 475, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 476 477 478 479 480 
+ID: 476, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: fft, op_name: (null) 
+ID: 477, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 478, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 479, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 480, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 481 482 483 
+ID: 481, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: power, op_name: (null) 
+ID: 482, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 3, ident_name: (null), op_name: (null) 
+ID: 483, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 484 487 
+ID: 484, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 485 486 
+ID: 485, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 486, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 487, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: / 488 491 
+ID: 488, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 489 490 
+ID: 489, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 490, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 491, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 492, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 493, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 494 495 
+ID: 494, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 495, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 496, Type: STMT Option: 5, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 497 500 
+ID: 497, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: < 498 499 
+ID: 498, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 499, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 500, Type: STMT Option: 2, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 501 
+ID: 501, Type: BLOCK Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 502 519 
+ID: 502, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 503 507 
+ID: 503, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 504 505 
+ID: 504, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 505, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 506 
+ID: 506, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 507, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 508 509 513 
+ID: 508, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: multiply, op_name: (null) 
+ID: 509, Type: UNARY_EXP Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 510 511 
+ID: 510, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 511, Type: INDEXES Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 512 
+ID: 512, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 513, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 514 515 516 
+ID: 514, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: power, op_name: (null) 
+ID: 515, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: d, op_name: (null) 
+ID: 516, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 517 518 
+ID: 517, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: mod, op_name: (null) 
+ID: 518, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 2, ident_name: (null), op_name: (null) 
+ID: 519, Type: STMT Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: = 520 521 
+ID: 520, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 521, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 522 523 
+ID: 522, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: i, op_name: (null) 
+ID: 523, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 524, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 525 
+ID: 525, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 526 
+ID: 526, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: stoptime, op_name: (null) 
+ID: 527, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 528, Type: STMT Option: 1, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 529 
+ID: 529, Type: FUNC_CALL Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 530 531 536 
+ID: 530, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: putarray, op_name: (null) 
+ID: 531, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: - 532 535 
+ID: 532, Type: BINARY_EXP Option: 0, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: + 533 534 
+ID: 533, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: n, op_name: (null) 
+ID: 534, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: m, op_name: (null) 
+ID: 535, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 1, ident_name: (null), op_name: (null) 
+ID: 536, Type: TOKEN Option: 0, const_or_not: 0, token_type: 2, decimal_val: 0, ident_name: a, op_name: (null) 
+ID: 537, Type: TOKEN Option: 0, const_or_not: 0, token_type: 12, decimal_val: 0, ident_name: (null), op_name: (null) 
+ID: 538, Type: STMT Option: 9, const_or_not: 0, token_type: 0, decimal_val: 0, ident_name: (null), op_name: (null) 539 
+ID: 539, Type: TOKEN Option: 0, const_or_not: 0, token_type: 1, decimal_val: 0, ident_name: (null), op_name: (null) 

@@ -1,6 +1,8 @@
 #include "./syntax_tree.h"
 #include <malloc.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 static int tree_node_id = 0;
 
@@ -40,7 +42,7 @@ void insert_sons(Syntax_Tree* cur_node, Syntax_Tree* targ_node, int flag){
     targ_node->father = cur_node;
     if (cur_node->sons_cnt == 0){
         cur_node->sons_cnt = 1;
-        cur_node->head_son = cur_node->tail_son = NULL;
+        cur_node->head_son = cur_node->tail_son = targ_node;
         return;
     }
     if (flag == 1){    // insert to tail
@@ -87,33 +89,52 @@ static void dfs_print(Syntax_Tree* root){
     switch (root->node_type){
         case TP_COMP_UNIT:
             printf("COMP_UNIT ");
-        case TP_BINARY_OP:
-            printf("BINARY_OP ");
-        case TP_UNARY_OP:
-            printf("UNARY_OP");
+            break;
+        case TP_BINARY_EXP:
+            printf("BINARY_EXP ");
+            break;
+        case TP_UNARY_EXP:
+            printf("UNARY_EXP ");
+            break;
         case TP_DECL:
             printf("DECL ");
+            break;
         case TP_DEF:
             printf("DEF ");
+            break;
         case TP_INDEXES:
             printf("INDEXES ");
+            break;
         case TP_INIT_VAL:
             printf("INIT_VAL ");
+            break;
         case TP_FUNC_DEF:
             printf("FUNC_DEF ");
+            break;
         case TP_FUNC_FPARAM:
             printf("FUNC_FPARAM ");
+            break;
         case TP_BLOCK:
             printf("BLOCK ");
+            break;
         case TP_STMT:
             printf("STMT ");
+            break;
         case TP_FUNC_CALL: 
             printf("FUNC_CALL ");
+            break;
         case TP_TOKEN:
-            printf("TOKEN");
-        default:;
+            printf("TOKEN ");
+            break;
+        default:
+            break;
     }
-    printf("Option: %d, const_or_not: %d, token_type: %d, ident_name: %s, op_name, %s", root->option, root->restric, root->token_type, root->ident_name, root->op_name);
+    printf("Option: %d, const_or_not: %d, token_type: %d, decimal_val: %u, ident_name: %s, op_name: %s ", root->option, root->restric, root->token_type, root->dec_val, root->ident_name, root->op_name);
+
+    for (Syntax_Tree* son = root->head_son; son != NULL; son = son->next_sib){
+        printf("%d ", son->node_id);
+    }
+    printf("\n");
 
     for (Syntax_Tree* son = root->head_son; son != NULL; son = son->next_sib){
         dfs_print(son);

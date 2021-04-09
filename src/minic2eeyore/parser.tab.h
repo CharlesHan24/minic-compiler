@@ -35,11 +35,11 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_Y_TAB_H_INCLUDED
-# define YY_YY_Y_TAB_H_INCLUDED
+#ifndef YY_YY_PARSER_TAB_H_INCLUDED
+# define YY_YY_PARSER_TAB_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 1
+# define YYDEBUG 0
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -85,39 +85,6 @@ extern int yydebug;
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
-/* Token kinds.  */
-#define YYEMPTY -2
-#define YYEOF 0
-#define YYerror 256
-#define YYUNDEF 257
-#define IF 258
-#define ELSE 259
-#define WHILE 260
-#define CONTINUE 261
-#define BREAK 262
-#define RETURN 263
-#define INT 264
-#define VOID 265
-#define CONST 266
-#define L_PAR 267
-#define R_PAR 268
-#define L_SBRAC 269
-#define R_SBRAC 270
-#define L_CBRAC 271
-#define R_CBRAC 272
-#define COMMA 273
-#define COLON 274
-#define DECIMAL_TOK 275
-#define IDENT 276
-#define IDENT_FUNC 277
-#define NOT_OP1 278
-#define MULDIV_OP2 279
-#define ADDMIN_OP3 280
-#define COMP_OP4 281
-#define EQUAL_OP5 282
-#define AND_OP6 283
-#define OR_OP7 284
-#define ASSIGN_OP8 285
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -129,7 +96,7 @@ union YYSTYPE
 	char* name;
 	struct Syntax_Tree* node;
 
-#line 133 "y.tab.h"
+#line 100 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -142,4 +109,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_Y_TAB_H_INCLUDED  */
+#endif /* !YY_YY_PARSER_TAB_H_INCLUDED  */
