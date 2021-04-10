@@ -6,6 +6,7 @@
 #include <errno.h>
 #include "./syntax_tree.h"
 #include "./name_hash.h"
+#include "./gen_eey.h"
 
 //int yydebug = 1;
 extern FILE* yyin;
@@ -255,25 +256,25 @@ FUNC_FPARAMS: FUNC_FPARAM
 ;
 FUNC_FPARAM:  INT IDENTIFIER
         {
-            $$ = new_node(NONCONST_REST, TP_DEF, 0, 0, 0, NULL, NULL);
+            $$ = new_node(NONCONST_REST, TP_DEF, 4, 0, 0, NULL, NULL);
             insert_sons($$, $2, 0);
         }
     |         INT IDENTIFIER L_SBRAC R_SBRAC
         {
-            $$ = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
+            $$ = new_node(NONCONST_REST, TP_DEF, 6, 0, 0, NULL, NULL);
             Syntax_Tree* tmp_node = new_node(NONCONST_REST, TP_INDEXES, 1, 0, 0, NULL, NULL);
             insert_sons($$, tmp_node, 0);
             insert_sons($$, $2, 0);
         }
     |         INT IDENTIFIER CONST_INDEXES
         {
-            $$ = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
+            $$ = new_node(NONCONST_REST, TP_DEF, 6, 0, 0, NULL, NULL);
             insert_sons($$, $3, 0);
             insert_sons($$, $2, 0);
         }
     |         INT IDENTIFIER L_SBRAC R_SBRAC CONST_INDEXES
         {
-            $$ = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
+            $$ = new_node(NONCONST_REST, TP_DEF, 6, 0, 0, NULL, NULL);
             $5->option = 1;
             insert_sons($$, $5, 0);
             insert_sons($$, $2, 0);
@@ -487,16 +488,22 @@ IDENTIFIER_FUNC:    IDENT_FUNC
 %%
 
 int main(int argc, char* argv[]){
-    if (argc != 2){
-        printf("Usage: ./parser TARGET_FILE\n");
+    if (argc != 3){
+        printf("Usage: ./parser INPUT_SYSY_FILE OUTPUT_EEYORE_FILE\n");
         return 0;
     }
     FILE* inp_file = fopen(argv[1], "r");
+    FILE* oup_file = fopen(argv[2], "w");
     printf("%s\n", argv[1]);
     yyin = inp_file;
 
     tree_root = NULL;
     yyparse();
-    print_tree(tree_root);
+    //print_tree(tree_root);
+
+    generate_eeyore(tree_root, oup_file);
+
+    destruct_tree_completely(tree_root);
+    hash_table_clear();
     return 0;
 }

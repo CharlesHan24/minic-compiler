@@ -51,11 +51,11 @@ ConstExp      ::= AddExp;
 这里不提供报错功能, 总是假定程序的语义正确.
 TP_COMPUNIT       an array of Decl | FuncType
 TP_DECL           (const) int + Array of TP_DEF             1 option. use flag to indicate const or not
-TP_DEF            Ident + (TP_INDEXES) + (= TP_INIT_LIST)        4 options
+TP_DEF            Ident + (TP_INDEXES) + (= TP_INIT_LIST)      [whether to print, or just a func param]     8 options
 TP_INDEXES:      many (const)exps. each const_exps indicate a dimension. when option = 1: the first dimension is considered to be none.  2 options
 TP_TOKEN          
 TP_INIT_VAL      two types. One: EXP. Second: {array of TP_INIT_VAL}    2 options
-TP_FUNC_DEF       FUNC_TYPE(TP_TOKEN) IDENT (TP_FUNC_FPRAM)
+TP_FUNC_DEF       FUNC_TYPE(TP_TOKEN) IDENT (TP_FUNC_FPRAM) TP_BLOCK
 TP_FUNC_FPRAM:    an array of TP_DEF, except that the first dimension could be []
 TP_BLOCK          an array of declaration or statement
 TP_STMT           many options

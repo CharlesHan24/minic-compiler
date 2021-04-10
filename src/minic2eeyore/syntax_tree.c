@@ -147,3 +147,16 @@ void print_tree(Syntax_Tree* root){
 
     dfs_print(root);
 }
+
+void forward_const_label(Syntax_Tree* root){
+    Syntax_Tree* son;
+    for (son = root->head_son; son != NULL; son = son->next_sib){
+        if (root->restric == CONST_REST){
+            son->restric = CONST_REST;
+        }
+        else{
+            son->restric = NONCONST_REST;
+        }
+        forward_const_label(root);
+    }
+}

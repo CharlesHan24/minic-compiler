@@ -23,6 +23,10 @@ Hash_Bucket* hash_insert_key(char* name){
         if (strcmp(cur_node->name, name) == 0){
             ret = cur_node;
             cur_node->count++;
+
+            Var_Attrib* new_var = malloc(sizeof(Var_Attrib));
+            new_var->next = cur_node->var_list_head;
+            cur_node->var_list_head = new_var;
         }
     }
     if (ret == NULL){
@@ -32,8 +36,43 @@ Hash_Bucket* hash_insert_key(char* name){
         ret->count++;
         ret->name = malloc(strlen(name) + 1);
         memcpy(ret->name, name, strlen(name));
+
+        Var_Attrib* new_var = malloc(sizeof(Var_Attrib));
+        new_var->next = NULL;
+        ret->var_list_head = new_var;
     }
     return ret;
+}
+
+int delete_insert_key(char* name){
+    int hash_val = calc_hash(name);
+    Hash_Bucket* ret = NULL;
+    Hash_Bucket* cur_node;
+    for (cur_node = hash_table[hash_val]; cur_node != NULL; cur_node = cur_node->next){
+        if (strcmp(cur_node->name, name) == 0){
+            ret = cur_node;
+            cur_node->count--;
+            free(cur_node->var_list_head->index_array);
+            Var_Attrib* tmp = cur_node->var_list_head;
+            cur_node->var_list_head = cur_node->var_list_head->next;
+            free(tmp);
+
+            if (cur_node->count == 0){
+                for (Hash_Bucket* tmp_node = hash_table[hash_val]; tmp_node != NULL; tmp_node = cur_node->next){
+                    if (tmp_node->next == cur_node){
+                        tmp_node->next = cur_node->next;
+                        free(cur_node->name);
+                        free(cur_node);
+                        break;
+                    }
+                }
+            }
+            return 1;
+        }
+    }
+    if (ret == NULL){
+        return 0;
+    }
 }
 
 void hash_table_clear(){
@@ -41,6 +80,13 @@ void hash_table_clear(){
         Hash_Bucket* cur_node = hash_table[i];
         Hash_Bucket* nxt_node;
         for(; cur_node != NULL; cur_node = nxt_node){
+            Var_Attrib* nxt_var;
+            for (Var_Attrib* cur_var = cur_node->var_list_head; cur_var != NULL; cur_var = nxt_var){
+                nxt_var = cur_var->next;
+                free(cur_var->index_array);
+                free(cur_var);
+            }
+
             nxt_node = cur_node->next;
             free(cur_node->name);
             free(cur_node);
