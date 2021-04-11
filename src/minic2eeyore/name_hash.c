@@ -14,6 +14,11 @@ void init_var_table(int param_var_cnt, int original_var_cnt){
     original_var_attrib = calloc(sizeof(Var_Attrib) * original_var_cnt, 1);
 }
 
+void destroy_var_table(){
+    free(param_attrib);
+    free(original_var_attrib);
+}
+
 int calc_hash(char* name){
     int len = strlen(name);
     int hash_val = 0;

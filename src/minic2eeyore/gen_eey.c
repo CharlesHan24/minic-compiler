@@ -7,21 +7,60 @@
 extern Var_Attrib* param_attrib;
 extern Var_Attrib* original_var_attrib;
 
+static Syntax_Tree* tree_root;
+
 static int original_var_id = -1;
 static int temp_var_id = -1;
 static int param_var_id = -1;
 static int fake_param_var_id = -1;
 static int label_id = -1;
+static int max_param;
+
+typedef struct Func_Register{
+    char* name;
+    struct Func_Register* next;
+    int exist_ret;
+}Func_Register;
+
+Func_Register* func_register_head;
+
+void func_regist(char* name, int exist_ret){
+    Func_Register* new_func = calloc(sizeof(Func_Register), 1);
+    new_func->name = name;
+    new_func->exist_ret = exist_ret;
+    new_func->next = func_register_head;
+    func_register_head = new_func;
+}
+
+int func_exist_ret(char* name){
+    for (Func_Register* reg = func_register_head; reg != NULL; reg = reg->next){
+        if (strcmp(name, reg->name) == 0){
+            return reg->exist_ret;
+        }
+    }
+    return 0;
+}
+
+void delete_func_reg_table(){
+    Func_Register* tmp;
+    for (Func_Register* reg = func_register_head; reg != NULL; reg = tmp){
+        tmp = reg->next;
+        free(reg);
+    }
+}
 
 #define MAX_LINE_WIDTH 80
 
 typedef struct Prov_Params{
     int supple_init_flag;
     int is_declare;
+    Var_Attrib* init_target_var;
+    int dimension;
+    int offset;
 }Prov_Params;
 
 typedef struct Ret_Psrams{
-    int x;
+    int dimension_match; // 1: not match
 }Ret_Params;
 
 static int new_temp_var(){
@@ -43,24 +82,6 @@ static int new_param_var(){
 static int new_label(){
     label_id++;
     return label_id;
-}
-
-static int compute_total_dimension(int* index_array, int index_array_len){
-    int res = 1;
-    for (int i = 0; i < index_array_len; i++){
-        res *= index_array[i];
-    }
-    return res;
-}
-
-static char* generate_assign_code(char prefix, int var_id,  Init_List init_list){
-    char* result = calloc(MAX_LINE_WIDTH * init_list.len, 1);
-    char* ptr = result;
-    for (int i = 0; i < init_list.len; i++){
-        sprintf(ptr, "%c%d[%d] = %d", prefix, var_id, init_list.index_arr[i] * 4, init_list.val_arr[i]);
-        ptr += strlen(ptr);
-    }
-    return result;
 }
 
 static Hash_Bucket* __wrap_insert_key(char* name, int var_id, int fake_id, char prefix){
@@ -88,9 +109,14 @@ static int check_const(Syntax_Tree* root){
 
 
 static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_param, Ret_Params* return_param){
+    if (root == NULL){
+        return 1;
+    }
+
     Prov_Params next_prov_param;
     Ret_Params next_ret_param;
     Syntax_Tree* son;
+    Var_Attrib* cur_var;
     memset(&next_prov_param, 0, sizeof(next_prov_param));
     memset(&next_ret_param, 0, sizeof(next_ret_param));
 
@@ -99,7 +125,6 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
     if (prov_param->is_declare == 1){
         if (root->node_type == TP_DEF){
             int tot_bytes = 1;
-            Var_Attrib* cur_var;
             if (root->head_son->var_prefix != 'p'){
                 cur_var = &original_var_attrib[root->head_son->var_id];
                 if (cur_var->is_single){
@@ -127,11 +152,11 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
     }
 
     else{
-        if ((root->node_type == TP_DECL) || (root->node_type == TP_DEF)){
-            return 1;
-        }
+        // if ((root->node_type == TP_DECL) || (root->node_type == TP_DEF)){
+        //     return 1;
+        // }
         switch (root->node_type){
-            case TP_COMP_UNIT:
+            case TP_COMP_UNIT:{
                 for (son = root->head_son; son != NULL; son = son->next_sib){
                     if (son->node_type == TP_DECL){
                         next_prov_param.is_declare = 1;
@@ -144,15 +169,14 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                     }
                 }
                 break;
+            }
 
-            case TP_INDEXES:
+            case TP_INDEXES:{
                 for (son = root->head_son; son != NULL; son = son->next_sib){
                     if (!dfs_generate(son, fout, &next_prov_param, &next_ret_param)){
                         return 0;
                     }
                 }
-
-                Var_Attrib* cur_var;
                 if (root->prev_sib->var_prefix == 'p'){
                     cur_var = &param_attrib[root->prev_sib->fake_id];
                 }
@@ -164,16 +188,24 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                 son = son->next_sib;
                 for (int i = 1; i < cur_var->index_array_len; i++){
                     fprintf(fout, "t%d = t%d * %d\n", root->var_id, root->var_id, cur_var->index_array[i]);
-                    fprintf(fout, "t%d = t%d + %c%d\n", root->var_id, root->var_id, son->var_prefix, son->var_id);
-                    son = son->next_sib;
+                    if (son != NULL){
+                        fprintf(fout, "t%d = t%d + %c%d\n", root->var_id, root->var_id, son->var_prefix, son->var_id);
+                        son = son->next_sib;
+                    }
+                    else{
+                        return_param->dimension_match = 1;
+                    }
                 }
                 fprintf(fout, "t%d = t%d * 4\n", root->var_id, root->var_id);
                 break;
+            }
             
-            case TP_FUNC_DEF:
+            case TP_FUNC_DEF:{
+                func_regist(root->head_son->next_sib->ident_name, root->head_son->token_type == TOK_INT);
+
                 if (root->option == 0){
                     fprintf(fout, "f_%s [0]\n", root->head_son->next_sib->ident_name);
-                } 
+                }
                 else{
                     fprintf(fout, "f_%s [%d]\n", root->head_son->next_sib->ident_name, root->head_son->next_sib->next_sib->sons_cnt);
                 }
@@ -185,6 +217,15 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                     }
                 }
                 next_prov_param.is_declare = 0;
+                if (strcmp(root->head_son->next_sib->ident_name, "main") == 0){
+                    for (Syntax_Tree* tmp_son = tree_root->head_son; tmp_son != NULL; tmp_son = tmp_son->next_sib){
+                        if (tmp_son->node_type == TP_DECL){
+                            if (!dfs_generate(tmp_son, fout, &next_prov_param, &next_ret_param)){
+                                return 0;
+                            }
+                        }
+                    }
+                }
 
                 if (!dfs_generate(root->tail_son, fout, &next_prov_param, &next_ret_param)){
                     return 0;
@@ -195,29 +236,33 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                 else{
                     fprintf(fout, "return 0\n");
                 }
-                break;
 
-            case TP_BLOCK:
+                fprintf(fout, "end f_%s\n", root->head_son->next_sib->ident_name);
+                break;
+            }
+
+            case TP_BLOCK:{
                 for (son = root->head_son; son != NULL; son = son->next_sib){
                     if (!dfs_generate(son, fout, &next_prov_param, &next_ret_param)){
                         return 0;
                     }
                 }
                 break;
+            }
 
-            case TP_TOKEN:
+            case TP_TOKEN:{
                 if (root->token_type == TOK_DEC){
                     fprintf(fout, "%c%d = %d\n", root->var_prefix, root->var_id, root->dec_val);
                 }
                 break;
+            }
             
-            case TP_FUNC_CALL:
+            case TP_FUNC_CALL:{
                 for (son = root->head_son; son != NULL; son = son->next_sib){
                     if (!dfs_generate(son, fout, &next_prov_param, &next_ret_param)){
                         return 0;
                     }
                 }
-
                 for (son = root->head_son->next_sib; son != NULL; son = son->next_sib){
                     fprintf(fout, "param %c%d\n", son->var_prefix, son->var_id);
                 }
@@ -226,11 +271,17 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                     fprintf(fout, "t%d = call f_%s\n", root->var_id, root->head_son->ident_name);
                 }
                 else{
-                    fprintf(fout, "call f_%s\n", root->head_son->ident_name);
+                    if (func_exist_ret(root->head_son->ident_name)){
+                        fprintf(fout, "t0 = call f_%s\n", root->head_son->ident_name);
+                    }
+                    else{
+                        fprintf(fout, "call f_%s\n", root->head_son->ident_name);
+                    }
                 }
                 break;
+            }
 
-            case TP_UNARY_EXP:
+            case TP_UNARY_EXP:{
                 for (son = root->head_son; son != NULL; son = son->next_sib){
                     if (!dfs_generate(son, fout, &next_prov_param, &next_ret_param)){
                         return 0;
@@ -240,12 +291,18 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                     fprintf(fout, "%c%d = %s%c%d\n", root->var_prefix, root->var_id, root->op_name, root->head_son->var_prefix, root->head_son->var_id);
                 }
                 else{
-                    fprintf(fout, "%c%d = %c%d[%c%d]\n", root->var_prefix, root->var_id, root->head_son->var_prefix, root->head_son->var_id, root->tail_son->var_prefix, root->tail_son->var_id);
+                    if ((next_ret_param.dimension_match) || ((root->father->node_type == TP_STMT) && (root->father->head_son == root) && (root->father->option == 0))){
+                        fprintf(fout, "%c%d = %c%d + %c%d\n", root->var_prefix, root->var_id, root->head_son->var_prefix, root->head_son->var_id, root->tail_son->var_prefix, root->tail_son->var_id);
+                    }
+                    else{
+                        fprintf(fout, "%c%d = %c%d[%c%d]\n", root->var_prefix, root->var_id, root->head_son->var_prefix, root->head_son->var_id, root->tail_son->var_prefix, root->tail_son->var_id);
+                    }
                 }
                 break;
+            }
             
-            case TP_BINARY_EXP:
-                if ((root->op_name[0] == '|') && (root->op_name[0] == '&')){
+            case TP_BINARY_EXP:{
+                if ((root->op_name[0] == '|') || (root->op_name[0] == '&')){
                     if (!dfs_generate(root->head_son, fout, &next_prov_param, &next_ret_param)){
                         return 0;
                     }
@@ -269,10 +326,10 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                     }
 
                     fprintf(fout, "%c%d = %c%d %s %c%d\n", root->var_prefix, root->var_id, root->head_son->var_prefix, root->head_son->var_id, root->op_name,root->tail_son->var_prefix, root->tail_son->var_id);
-                    break;
                 }
-            
-            case TP_STMT:
+                break;
+            }
+            case TP_STMT:{
                 if ((root->option <= 2) || (root->option >= 8)){
                     for (son = root->head_son; son != NULL; son = son->next_sib){
                         if (!dfs_generate(son, fout, &next_prov_param, &next_ret_param)){
@@ -280,7 +337,12 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                         }
                     }
                     if (root->option == 0){
-                        fprintf(fout, "%c%d = %c%d\n", root->head_son->var_prefix, root->head_son->var_id, root->tail_son->var_prefix, root->tail_son->var_id);
+                        if (root->head_son->option == 1){   // indexing
+                            fprintf(fout, "%c%d[0] = %c%d\n", root->head_son->var_prefix, root->head_son->var_id, root->tail_son->var_prefix, root->tail_son->var_id);
+                        }
+                        else{
+                            fprintf(fout, "%c%d = %c%d\n", root->head_son->var_prefix, root->head_son->var_id, root->tail_son->var_prefix, root->tail_son->var_id);
+                        }
                     }
                     else if (root->option == 8){
                         fprintf(fout, "return\n");
@@ -341,6 +403,66 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                     }
                 }
                 break;
+            }
+
+            case TP_DECL:{
+                for (son = root->head_son; son != NULL; son = son->next_sib){
+                    if (!dfs_generate(son, fout, &next_prov_param, &next_ret_param)){
+                        return 0;
+                    }
+                }
+                break;
+            }
+            case TP_DEF:{
+                if ((root->option & 1) && ((root->option & 4) == 0)){
+                    if (root->tail_son->option == 0){
+                        if (!dfs_generate(root->tail_son->head_son, fout, &next_prov_param, &next_ret_param)){
+                            return 0;
+                        }
+                        fprintf(fout, "T%d = %c%d\n", root->head_son->var_id, root->tail_son->head_son->var_prefix, root->tail_son->head_son->var_id);
+                    }
+                    else{
+                        next_prov_param.init_target_var = &original_var_attrib[root->head_son->var_id];
+                        next_prov_param.dimension = 0;
+                        next_prov_param.offset = 0;
+                        if (!dfs_generate(root->tail_son, fout, &next_prov_param, &next_ret_param)){
+                            return 0;
+                        }
+                    }
+                }
+                break;
+            }
+
+            case TP_INIT_VAL:{
+                int cur_offset = prov_param->offset;
+                int step = 1;
+                cur_var = prov_param->init_target_var;
+                for (int i = prov_param->dimension + 1; i < cur_var->index_array_len; i++){
+                    step *= cur_var->index_array[i];
+                }
+
+                for (son = root->head_son; son != NULL; son = son->next_sib){
+                    if (son->node_type != TP_INIT_VAL){
+                        if (!dfs_generate(son, fout, &next_prov_param, &next_ret_param)){
+                            return 0;
+                        }
+                        fprintf(fout, "T%d[%d] = %c%d\n", prov_param->init_target_var->var_id, cur_offset * 4, son->var_prefix, son->var_id);
+                        cur_offset++;
+                    }
+                    else{
+                        next_prov_param.offset = cur_offset;
+                        next_prov_param.dimension = prov_param->dimension + 1;
+                        next_prov_param.init_target_var = cur_var;
+                        if (!dfs_generate(son, fout, &next_prov_param, &next_ret_param)){
+                            return 0;
+                        }
+                        cur_offset += son->option == 1? step: 1;
+                    }
+                }
+                break;
+            }
+            default:
+                break;
         }
     }
     return 1;
@@ -391,69 +513,71 @@ void dfs_declaration(Syntax_Tree* root, int is_declare, int is_fparam){
 
     Syntax_Tree* son;
     for (son = root->head_son; son != NULL; son = son->next_sib){
-        dfs_declaration(son, is_declare, is_fparam | ((root->node_type == TP_FUNC_DEF) && (son->next_sib != NULL)));
+        dfs_declaration(son, is_declare & (son->node_type != TP_INIT_VAL), is_fparam | ((root->node_type == TP_FUNC_DEF) && (son->next_sib != NULL)));
     }
 
     if ((root->node_type == TP_BINARY_EXP) || (root->node_type == TP_UNARY_EXP)){
-        switch (root->op_name[0]){
-            case '+':
-                if (root->node_type == TP_UNARY_EXP){
-                    root->dec_val = root->head_son->dec_val;
-                }
-                else{
-                    root->dec_val = root->head_son->dec_val + root->tail_son->dec_val;
-                }
-                break;
-            case '-':
-                if (root->node_type == TP_UNARY_EXP){
-                    root->dec_val = -root->head_son->dec_val;
-                }
-                else{
-                    root->dec_val = root->head_son->dec_val - root->tail_son->dec_val;
-                }
-                break;
-            case '*':
-                root->dec_val = root->head_son->dec_val * root->tail_son->dec_val;
-                break;
-            case '/':
-                root->dec_val = root->tail_son->dec_val? root->head_son->dec_val / root->tail_son->dec_val: 0;
-                break;
-            case '%':
-                root->dec_val = root->tail_son->dec_val? root->head_son->dec_val % root->tail_son->dec_val: 0;
-                break;
-            case '&':
-                root->dec_val = root->head_son->dec_val && root->tail_son->dec_val;
-                break;
-            case '|':
-                root->dec_val = root->head_son->dec_val || root->tail_son->dec_val;
-                break;
-            case '!':
-                if (strlen(root->op_name) == 1){
-                    root->dec_val = !root->head_son->dec_val;
-                }
-                else{
-                    root->dec_val = root->head_son->dec_val != root->tail_son->dec_val;
-                }
-                break;
-            case '=':
-                root->dec_val = root->head_son->dec_val == root->tail_son->dec_val;
-                break;
-            case '>':
-                if (strlen(root->op_name) == 1){
-                    root->dec_val = root->head_son->dec_val > root->tail_son->dec_val;
-                }
-                else{
-                    root->dec_val = root->head_son->dec_val >= root->tail_son->dec_val;
-                }
-                break;
-            case '<':
-                if (strlen(root->op_name) == 1){
-                    root->dec_val = root->head_son->dec_val < root->tail_son->dec_val;
-                }
-                else{
-                    root->dec_val = root->head_son->dec_val <= root->tail_son->dec_val;
-                }
-                break;
+        if (root->op_name != NULL){
+            switch (root->op_name[0]){
+                case '+':
+                    if (root->node_type == TP_UNARY_EXP){
+                        root->dec_val = root->head_son->dec_val;
+                    }
+                    else{
+                        root->dec_val = root->head_son->dec_val + root->tail_son->dec_val;
+                    }
+                    break;
+                case '-':
+                    if (root->node_type == TP_UNARY_EXP){
+                        root->dec_val = -root->head_son->dec_val;
+                    }
+                    else{
+                        root->dec_val = root->head_son->dec_val - root->tail_son->dec_val;
+                    }
+                    break;
+                case '*':
+                    root->dec_val = root->head_son->dec_val * root->tail_son->dec_val;
+                    break;
+                case '/':
+                    root->dec_val = root->tail_son->dec_val? root->head_son->dec_val / root->tail_son->dec_val: 0;
+                    break;
+                case '%':
+                    root->dec_val = root->tail_son->dec_val? root->head_son->dec_val % root->tail_son->dec_val: 0;
+                    break;
+                case '&':
+                    root->dec_val = root->head_son->dec_val && root->tail_son->dec_val;
+                    break;
+                case '|':
+                    root->dec_val = root->head_son->dec_val || root->tail_son->dec_val;
+                    break;
+                case '!':
+                    if (strlen(root->op_name) == 1){
+                        root->dec_val = !root->head_son->dec_val;
+                    }
+                    else{
+                        root->dec_val = root->head_son->dec_val != root->tail_son->dec_val;
+                    }
+                    break;
+                case '=':
+                    root->dec_val = root->head_son->dec_val == root->tail_son->dec_val;
+                    break;
+                case '>':
+                    if (strlen(root->op_name) == 1){
+                        root->dec_val = root->head_son->dec_val > root->tail_son->dec_val;
+                    }
+                    else{
+                        root->dec_val = root->head_son->dec_val >= root->tail_son->dec_val;
+                    }
+                    break;
+                case '<':
+                    if (strlen(root->op_name) == 1){
+                        root->dec_val = root->head_son->dec_val < root->tail_son->dec_val;
+                    }
+                    else{
+                        root->dec_val = root->head_son->dec_val <= root->tail_son->dec_val;
+                    }
+                    break;
+            }
         }
     }
     if (!is_declare){
@@ -478,9 +602,13 @@ void dfs_declaration(Syntax_Tree* root, int is_declare, int is_fparam){
     } 
     
 
-    if ((root->node_type == TP_BLOCK) || (root->node_type == TP_FUNC_DEF)){
+    if (root->node_type == TP_BLOCK){
         delete_variable(root);
     }
+    else if ((root->node_type == TP_FUNC_DEF) && (root->option == 1)){ // function with parameter
+        delete_variable(root->tail_son->prev_sib);
+    }
+
     if (root->node_type == TP_DEF){
         Var_Attrib* cur_var;
         if (root->head_son->var_prefix == 'p'){
@@ -546,8 +674,36 @@ static int dfs_count_def(Syntax_Tree* root){
     return res;
 }
 
+// int get_max_param(Syntax_Tree* root){
+//     int res = 0;
+//     if (root->node_type == TP_FUNC_FPARAM){
+//         res = root->sons_cnt;
+//     }
+//     for (Syntax_Tree* son = root->head_son; son != NULL; son = son->next_sib){
+//         int son_res = get_max_param(son);
+//         if (res < son_res){
+//             res = son_res;
+//         }
+//     }
+//     return res;
+// }
 
 void generate_eeyore(Syntax_Tree* root, FILE* fout){
+    tree_root = root;
+
+    temp_var_id = 0;
+    fprintf(fout, "var t0\n");
+
+    func_regist("getint", 1);
+    func_regist("getch", 1);
+    func_regist("getarray", 1);
+    func_regist("putint", 0);
+    func_regist("putarray", 0);
+    func_regist("putch", 0);
+    func_regist("putf", 0);
+    func_regist("starttime", 0);
+    func_regist("stoptime", 0);
+
     forward_const_label(root);
     // if (!check_const(root)){
     //     return;
@@ -565,4 +721,8 @@ void generate_eeyore(Syntax_Tree* root, FILE* fout){
     memset(&next_prov_param, 0, sizeof(next_prov_param));
     memset(&next_ret_param, 0, sizeof(next_ret_param));
     dfs_generate(root, fout, &next_prov_param, &next_ret_param);
+
+    delete_func_reg_table();
+    hash_table_clear();
+    destroy_var_table();
 }

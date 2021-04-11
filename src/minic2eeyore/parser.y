@@ -504,6 +504,6 @@ int main(int argc, char* argv[]){
     generate_eeyore(tree_root, oup_file);
 
     destruct_tree_completely(tree_root);
-    hash_table_clear();
+    
     return 0;
 }

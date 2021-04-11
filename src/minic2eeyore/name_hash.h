@@ -35,6 +35,8 @@ typedef struct Hash_Bucket{
 
 void init_var_table(int param_var_cnt, int original_var_cnt);
 
+void destroy_var_table();
+
 int calc_hash(char* name);
 
 Hash_Bucket* hash_insert_key(char* name);
