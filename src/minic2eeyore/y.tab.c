@@ -76,6 +76,7 @@
 #include <errno.h>
 #include "./syntax_tree.h"
 #include "./name_hash.h"
+#include "./gen_eey.h"
 
 //int yydebug = 1;
 extern FILE* yyin;
@@ -93,7 +94,7 @@ void yyerror(char* s){
 }
 
 
-#line 97 "y.tab.c"
+#line 98 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -206,13 +207,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 28 "parser.y"
+#line 29 "parser.y"
 
 	unsigned val;
 	char* name;
 	struct Syntax_Tree* node;
 
-#line 216 "y.tab.c"
+#line 217 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -683,16 +684,16 @@ static const yytype_int8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_int16 yyrline[] =
 {
-       0,    56,    56,    62,    68,    74,    81,    82,    84,    89,
-      95,   100,   106,   107,   112,   118,   124,   132,   137,   141,
-     146,   151,   157,   159,   164,   170,   176,   183,   188,   195,
-     200,   204,   209,   214,   220,   227,   236,   240,   245,   250,
-     256,   261,   268,   274,   282,   287,   292,   298,   299,   301,
-     305,   311,   316,   321,   327,   334,   340,   344,   348,   352,
-     358,   360,   362,   363,   370,   371,   378,   379,   384,   389,
-     395,   400,   405,   410,   416,   417,   418,   420,   428,   433,
-     434,   441,   442,   449,   451,   452,   459,   460,   467,   476,
-     481
+       0,    57,    57,    63,    69,    75,    82,    83,    85,    90,
+      96,   101,   107,   108,   113,   119,   125,   133,   138,   142,
+     147,   152,   158,   160,   165,   171,   177,   184,   189,   196,
+     201,   205,   210,   215,   221,   228,   237,   241,   246,   251,
+     257,   262,   269,   275,   283,   288,   293,   299,   300,   302,
+     306,   312,   317,   322,   328,   335,   341,   345,   349,   353,
+     359,   361,   363,   364,   371,   372,   379,   380,   385,   390,
+     396,   401,   406,   411,   417,   418,   419,   421,   429,   434,
+     435,   442,   443,   450,   452,   453,   460,   461,   468,   477,
+     482
 };
 #endif
 
@@ -1385,301 +1386,301 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* COMP_UNIT: DECL  */
-#line 57 "parser.y"
+#line 58 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_COMP_UNIT, 0, 0, 0, NULL, NULL);
             tree_root = (yyval.node);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1395 "y.tab.c"
+#line 1396 "y.tab.c"
     break;
 
   case 3: /* COMP_UNIT: FUNC_DEF  */
-#line 63 "parser.y"
+#line 64 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_COMP_UNIT, 0, 0, 0, NULL, NULL);
             tree_root = (yyval.node);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1405 "y.tab.c"
+#line 1406 "y.tab.c"
     break;
 
   case 4: /* COMP_UNIT: DECL COMP_UNIT  */
-#line 69 "parser.y"
+#line 70 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             tree_root = (yyval.node);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1415 "y.tab.c"
+#line 1416 "y.tab.c"
     break;
 
   case 5: /* COMP_UNIT: FUNC_DEF COMP_UNIT  */
-#line 75 "parser.y"
+#line 76 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             tree_root = (yyval.node);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1425 "y.tab.c"
+#line 1426 "y.tab.c"
     break;
 
   case 6: /* DECL: CONST_DECL  */
-#line 81 "parser.y"
+#line 82 "parser.y"
                        {(yyval.node) = (yyvsp[0].node);}
-#line 1431 "y.tab.c"
+#line 1432 "y.tab.c"
     break;
 
   case 7: /* DECL: VAR_DECL  */
-#line 82 "parser.y"
+#line 83 "parser.y"
                        {(yyval.node) = (yyvsp[0].node);}
-#line 1437 "y.tab.c"
+#line 1438 "y.tab.c"
     break;
 
   case 8: /* CONST_INDEXES: L_SBRAC CONST_EXP R_SBRAC  */
-#line 85 "parser.y"
+#line 86 "parser.y"
         {
             (yyval.node) = new_node(CONST_REST, TP_INDEXES, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1446 "y.tab.c"
+#line 1447 "y.tab.c"
     break;
 
   case 9: /* CONST_INDEXES: L_SBRAC CONST_EXP R_SBRAC CONST_INDEXES  */
-#line 90 "parser.y"
+#line 91 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1455 "y.tab.c"
+#line 1456 "y.tab.c"
     break;
 
   case 10: /* VAR_INDEXES: L_SBRAC EXP R_SBRAC  */
-#line 96 "parser.y"
+#line 97 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_INDEXES, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1464 "y.tab.c"
+#line 1465 "y.tab.c"
     break;
 
   case 11: /* VAR_INDEXES: L_SBRAC EXP R_SBRAC VAR_INDEXES  */
-#line 101 "parser.y"
+#line 102 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1473 "y.tab.c"
+#line 1474 "y.tab.c"
     break;
 
   case 12: /* CONST_DECL: CONST INT CONST_DEFS COLON  */
-#line 106 "parser.y"
+#line 107 "parser.y"
                                         {(yyval.node) = (yyvsp[-1].node);}
-#line 1479 "y.tab.c"
+#line 1480 "y.tab.c"
     break;
 
   case 13: /* CONST_DEFS: CONST_DEF  */
-#line 108 "parser.y"
+#line 109 "parser.y"
         {
             (yyval.node) = new_node(CONST_REST, TP_DECL, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1488 "y.tab.c"
+#line 1489 "y.tab.c"
     break;
 
   case 14: /* CONST_DEFS: CONST_DEF COMMA CONST_DEFS  */
-#line 113 "parser.y"
+#line 114 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1497 "y.tab.c"
+#line 1498 "y.tab.c"
     break;
 
   case 15: /* CONST_DEF: IDENTIFIER ASSIGN_OP8 CONST_INIT_VAL  */
-#line 119 "parser.y"
+#line 120 "parser.y"
         {
             (yyval.node) = new_node(CONST_REST, TP_DEF, 1, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1507 "y.tab.c"
+#line 1508 "y.tab.c"
     break;
 
   case 16: /* CONST_DEF: IDENTIFIER CONST_INDEXES ASSIGN_OP8 CONST_INIT_VAL  */
-#line 125 "parser.y"
+#line 126 "parser.y"
         {
             (yyval.node) = new_node(CONST_REST, TP_DEF, 3, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
             insert_sons((yyval.node), (yyvsp[-3].node), 0);
         }
-#line 1518 "y.tab.c"
+#line 1519 "y.tab.c"
     break;
 
   case 17: /* CONST_INIT_VAL: CONST_EXP  */
-#line 133 "parser.y"
+#line 134 "parser.y"
         {
             (yyval.node) = new_node(CONST_REST, TP_INIT_VAL, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1527 "y.tab.c"
+#line 1528 "y.tab.c"
     break;
 
   case 18: /* CONST_INIT_VAL: L_CBRAC R_CBRAC  */
-#line 138 "parser.y"
+#line 139 "parser.y"
         {
             (yyval.node) = new_node(CONST_REST, TP_INIT_VAL, 1, 0, 0, NULL, NULL);
         }
-#line 1535 "y.tab.c"
+#line 1536 "y.tab.c"
     break;
 
   case 19: /* CONST_INIT_VAL: L_CBRAC CONST_INIT_LIST R_CBRAC  */
-#line 142 "parser.y"
+#line 143 "parser.y"
         {
             (yyval.node) = (yyvsp[-1].node);
         }
-#line 1543 "y.tab.c"
+#line 1544 "y.tab.c"
     break;
 
   case 20: /* CONST_INIT_LIST: CONST_INIT_VAL  */
-#line 147 "parser.y"
+#line 148 "parser.y"
         {
             (yyval.node) = new_node(CONST_REST, TP_INIT_VAL, 1, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1552 "y.tab.c"
+#line 1553 "y.tab.c"
     break;
 
   case 21: /* CONST_INIT_LIST: CONST_INIT_VAL COMMA CONST_INIT_LIST  */
-#line 152 "parser.y"
+#line 153 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1561 "y.tab.c"
+#line 1562 "y.tab.c"
     break;
 
   case 22: /* VAR_DECL: INT VAR_DEFS COLON  */
-#line 157 "parser.y"
+#line 158 "parser.y"
                              {(yyval.node) = (yyvsp[-1].node);}
-#line 1567 "y.tab.c"
+#line 1568 "y.tab.c"
     break;
 
   case 23: /* VAR_DEFS: VAR_DEF  */
-#line 160 "parser.y"
+#line 161 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_DECL, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1576 "y.tab.c"
+#line 1577 "y.tab.c"
     break;
 
   case 24: /* VAR_DEFS: VAR_DEF COMMA VAR_DEFS  */
-#line 165 "parser.y"
+#line 166 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1585 "y.tab.c"
+#line 1586 "y.tab.c"
     break;
 
   case 25: /* VAR_DEF: IDENTIFIER ASSIGN_OP8 INIT_VAL  */
-#line 171 "parser.y"
+#line 172 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_DEF, 1, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1595 "y.tab.c"
+#line 1596 "y.tab.c"
     break;
 
   case 26: /* VAR_DEF: IDENTIFIER CONST_INDEXES ASSIGN_OP8 INIT_VAL  */
-#line 177 "parser.y"
+#line 178 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_DEF, 3, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
             insert_sons((yyval.node), (yyvsp[-3].node), 0);
         }
-#line 1606 "y.tab.c"
+#line 1607 "y.tab.c"
     break;
 
   case 27: /* VAR_DEF: IDENTIFIER  */
-#line 184 "parser.y"
+#line 185 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_DEF, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1615 "y.tab.c"
+#line 1616 "y.tab.c"
     break;
 
   case 28: /* VAR_DEF: IDENTIFIER CONST_INDEXES  */
-#line 189 "parser.y"
+#line 190 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1625 "y.tab.c"
+#line 1626 "y.tab.c"
     break;
 
   case 29: /* INIT_VAL: EXP  */
-#line 196 "parser.y"
+#line 197 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_INIT_VAL, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1634 "y.tab.c"
+#line 1635 "y.tab.c"
     break;
 
   case 30: /* INIT_VAL: L_CBRAC R_CBRAC  */
-#line 201 "parser.y"
+#line 202 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_INIT_VAL, 1, 0, 0, NULL, NULL);
         }
-#line 1642 "y.tab.c"
+#line 1643 "y.tab.c"
     break;
 
   case 31: /* INIT_VAL: L_CBRAC INIT_LIST R_CBRAC  */
-#line 205 "parser.y"
+#line 206 "parser.y"
         {
             (yyval.node) = (yyvsp[-1].node);
         }
-#line 1650 "y.tab.c"
+#line 1651 "y.tab.c"
     break;
 
   case 32: /* INIT_LIST: INIT_VAL  */
-#line 210 "parser.y"
+#line 211 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_INIT_VAL, 1, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1659 "y.tab.c"
+#line 1660 "y.tab.c"
     break;
 
   case 33: /* INIT_LIST: INIT_VAL COMMA INIT_LIST  */
-#line 215 "parser.y"
+#line 216 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1668 "y.tab.c"
+#line 1669 "y.tab.c"
     break;
 
   case 34: /* FUNC_DEF: FUNC_TYPE IDENTIFIER_FUNC R_PAR BLOCK  */
-#line 221 "parser.y"
+#line 222 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_FUNC_DEF, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
             insert_sons((yyval.node), (yyvsp[-3].node), 0);
         }
-#line 1679 "y.tab.c"
+#line 1680 "y.tab.c"
     break;
 
   case 35: /* FUNC_DEF: FUNC_TYPE IDENTIFIER_FUNC FUNC_FPARAMS R_PAR BLOCK  */
-#line 228 "parser.y"
+#line 229 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_FUNC_DEF, 1, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
@@ -1687,443 +1688,443 @@ yyreduce:
             insert_sons((yyval.node), (yyvsp[-3].node), 0);
             insert_sons((yyval.node), (yyvsp[-4].node), 0);
         }
-#line 1691 "y.tab.c"
+#line 1692 "y.tab.c"
     break;
 
   case 36: /* FUNC_TYPE: INT  */
-#line 237 "parser.y"
+#line 238 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_INT, 0, NULL, NULL);
         }
-#line 1699 "y.tab.c"
+#line 1700 "y.tab.c"
     break;
 
   case 37: /* FUNC_TYPE: VOID  */
-#line 241 "parser.y"
+#line 242 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_VOID, 0, NULL, NULL);
         }
-#line 1707 "y.tab.c"
+#line 1708 "y.tab.c"
     break;
 
   case 38: /* FUNC_FPARAMS: FUNC_FPARAM  */
-#line 246 "parser.y"
+#line 247 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_FUNC_FPARAM, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1716 "y.tab.c"
+#line 1717 "y.tab.c"
     break;
 
   case 39: /* FUNC_FPARAMS: FUNC_FPARAM COMMA FUNC_FPARAMS  */
-#line 251 "parser.y"
+#line 252 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1725 "y.tab.c"
+#line 1726 "y.tab.c"
     break;
 
   case 40: /* FUNC_FPARAM: INT IDENTIFIER  */
-#line 257 "parser.y"
+#line 258 "parser.y"
         {
-            (yyval.node) = new_node(NONCONST_REST, TP_DEF, 0, 0, 0, NULL, NULL);
+            (yyval.node) = new_node(NONCONST_REST, TP_DEF, 4, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1734 "y.tab.c"
+#line 1735 "y.tab.c"
     break;
 
   case 41: /* FUNC_FPARAM: INT IDENTIFIER L_SBRAC R_SBRAC  */
-#line 262 "parser.y"
+#line 263 "parser.y"
         {
-            (yyval.node) = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
+            (yyval.node) = new_node(NONCONST_REST, TP_DEF, 6, 0, 0, NULL, NULL);
             Syntax_Tree* tmp_node = new_node(NONCONST_REST, TP_INDEXES, 1, 0, 0, NULL, NULL);
             insert_sons((yyval.node), tmp_node, 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1745 "y.tab.c"
+#line 1746 "y.tab.c"
     break;
 
   case 42: /* FUNC_FPARAM: INT IDENTIFIER CONST_INDEXES  */
-#line 269 "parser.y"
+#line 270 "parser.y"
         {
-            (yyval.node) = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
+            (yyval.node) = new_node(NONCONST_REST, TP_DEF, 6, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1755 "y.tab.c"
+#line 1756 "y.tab.c"
     break;
 
   case 43: /* FUNC_FPARAM: INT IDENTIFIER L_SBRAC R_SBRAC CONST_INDEXES  */
-#line 275 "parser.y"
+#line 276 "parser.y"
         {
-            (yyval.node) = new_node(NONCONST_REST, TP_DEF, 2, 0, 0, NULL, NULL);
+            (yyval.node) = new_node(NONCONST_REST, TP_DEF, 6, 0, 0, NULL, NULL);
             (yyvsp[0].node)->option = 1;
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-3].node), 0);
         }
-#line 1766 "y.tab.c"
+#line 1767 "y.tab.c"
     break;
 
   case 44: /* BLOCK: L_CBRAC BLOCK_ITEMS R_CBRAC  */
-#line 283 "parser.y"
+#line 284 "parser.y"
         {
             (yyval.node) = (yyvsp[-1].node);
         }
-#line 1774 "y.tab.c"
+#line 1775 "y.tab.c"
     break;
 
   case 45: /* BLOCK_ITEMS: BLOCK_ITEM  */
-#line 288 "parser.y"
+#line 289 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_BLOCK, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1783 "y.tab.c"
+#line 1784 "y.tab.c"
     break;
 
   case 46: /* BLOCK_ITEMS: BLOCK_ITEM BLOCK_ITEMS  */
-#line 293 "parser.y"
+#line 294 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1792 "y.tab.c"
+#line 1793 "y.tab.c"
     break;
 
   case 47: /* BLOCK_ITEM: DECL  */
-#line 298 "parser.y"
+#line 299 "parser.y"
                      {(yyval.node) = (yyvsp[0].node);}
-#line 1798 "y.tab.c"
+#line 1799 "y.tab.c"
     break;
 
   case 48: /* BLOCK_ITEM: STMT  */
-#line 299 "parser.y"
+#line 300 "parser.y"
                      {(yyval.node) = (yyvsp[0].node);}
-#line 1804 "y.tab.c"
+#line 1805 "y.tab.c"
     break;
 
   case 49: /* STMT: COLON  */
-#line 302 "parser.y"
+#line 303 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_NONE, 0, NULL, NULL);
         }
-#line 1812 "y.tab.c"
+#line 1813 "y.tab.c"
     break;
 
   case 50: /* STMT: LVAL ASSIGN_OP8 EXP COLON  */
-#line 306 "parser.y"
+#line 307 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 0, 0, 0, NULL, (yyvsp[-2].name));
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
             insert_sons((yyval.node), (yyvsp[-3].node), 0);
         }
-#line 1822 "y.tab.c"
+#line 1823 "y.tab.c"
     break;
 
   case 51: /* STMT: EXP  */
-#line 312 "parser.y"
+#line 313 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 1, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1831 "y.tab.c"
+#line 1832 "y.tab.c"
     break;
 
   case 52: /* STMT: BLOCK  */
-#line 317 "parser.y"
+#line 318 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 2, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1840 "y.tab.c"
+#line 1841 "y.tab.c"
     break;
 
   case 53: /* STMT: IF L_PAR COND R_PAR STMT  */
-#line 322 "parser.y"
+#line 323 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 3, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1850 "y.tab.c"
+#line 1851 "y.tab.c"
     break;
 
   case 54: /* STMT: IF L_PAR COND R_PAR STMT ELSE STMT  */
-#line 328 "parser.y"
+#line 329 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 4, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
             insert_sons((yyval.node), (yyvsp[-4].node), 0);
         }
-#line 1861 "y.tab.c"
+#line 1862 "y.tab.c"
     break;
 
   case 55: /* STMT: WHILE L_PAR COND R_PAR STMT  */
-#line 335 "parser.y"
+#line 336 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 5, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1871 "y.tab.c"
+#line 1872 "y.tab.c"
     break;
 
   case 56: /* STMT: BREAK COLON  */
-#line 341 "parser.y"
+#line 342 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 6, 0, 0, NULL, NULL);
         }
-#line 1879 "y.tab.c"
+#line 1880 "y.tab.c"
     break;
 
   case 57: /* STMT: CONTINUE COLON  */
-#line 345 "parser.y"
+#line 346 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 7, 0, 0, NULL, NULL);
         }
-#line 1887 "y.tab.c"
+#line 1888 "y.tab.c"
     break;
 
   case 58: /* STMT: RETURN COLON  */
-#line 349 "parser.y"
+#line 350 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 8, 0, 0, NULL, NULL);
         }
-#line 1895 "y.tab.c"
+#line 1896 "y.tab.c"
     break;
 
   case 59: /* STMT: RETURN EXP COLON  */
-#line 353 "parser.y"
+#line 354 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_STMT, 9, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1904 "y.tab.c"
+#line 1905 "y.tab.c"
     break;
 
   case 60: /* CONST_EXP: EXP  */
-#line 358 "parser.y"
+#line 359 "parser.y"
                {(yyval.node) = (yyvsp[0].node);}
-#line 1910 "y.tab.c"
+#line 1911 "y.tab.c"
     break;
 
   case 61: /* EXP: ADD_EXP  */
-#line 360 "parser.y"
+#line 361 "parser.y"
                   {(yyval.node) = (yyvsp[0].node);}
-#line 1916 "y.tab.c"
+#line 1917 "y.tab.c"
     break;
 
   case 62: /* ADD_EXP: MUL_EXP  */
-#line 362 "parser.y"
+#line 363 "parser.y"
                    {(yyval.node) = (yyvsp[0].node);}
-#line 1922 "y.tab.c"
+#line 1923 "y.tab.c"
     break;
 
   case 63: /* ADD_EXP: ADD_EXP ADDMIN_OP3 MUL_EXP  */
-#line 364 "parser.y"
+#line 365 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_BINARY_EXP, 0, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1932 "y.tab.c"
+#line 1933 "y.tab.c"
     break;
 
   case 64: /* MUL_EXP: UNARY_EXP  */
-#line 370 "parser.y"
+#line 371 "parser.y"
                      {(yyval.node) = (yyvsp[0].node);}
-#line 1938 "y.tab.c"
+#line 1939 "y.tab.c"
     break;
 
   case 65: /* MUL_EXP: MUL_EXP MULDIV_OP2 UNARY_EXP  */
-#line 372 "parser.y"
+#line 373 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_BINARY_EXP, 0, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1948 "y.tab.c"
+#line 1949 "y.tab.c"
     break;
 
   case 66: /* UNARY_EXP: PRIMARY_EXP  */
-#line 378 "parser.y"
+#line 379 "parser.y"
                        {(yyval.node) = (yyvsp[0].node);}
-#line 1954 "y.tab.c"
+#line 1955 "y.tab.c"
     break;
 
   case 67: /* UNARY_EXP: IDENTIFIER_FUNC R_PAR  */
-#line 380 "parser.y"
+#line 381 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_FUNC_CALL, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 1963 "y.tab.c"
+#line 1964 "y.tab.c"
     break;
 
   case 68: /* UNARY_EXP: IDENTIFIER_FUNC FUNC_RPARAMS R_PAR  */
-#line 385 "parser.y"
+#line 386 "parser.y"
         {
             (yyval.node) = (yyvsp[-1].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 1972 "y.tab.c"
+#line 1973 "y.tab.c"
     break;
 
   case 69: /* UNARY_EXP: UNARY_OP UNARY_EXP  */
-#line 390 "parser.y"
+#line 391 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_UNARY_EXP, 0, 0, 0, NULL, (yyvsp[-1].node)->op_name);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 1981 "y.tab.c"
+#line 1982 "y.tab.c"
     break;
 
   case 70: /* UNARY_OP: ADDMIN_OP3  */
-#line 396 "parser.y"
+#line 397 "parser.y"
         {
             // tmp
             (yyval.node) = new_node(0, 0, 0, 0, 0, NULL, (yyvsp[0].name));
         }
-#line 1990 "y.tab.c"
+#line 1991 "y.tab.c"
     break;
 
   case 71: /* UNARY_OP: NOT_OP1  */
-#line 401 "parser.y"
+#line 402 "parser.y"
         {
             (yyval.node) = new_node(0, 0, 0, 0, 0, NULL, (yyvsp[0].name));
         }
-#line 1998 "y.tab.c"
+#line 1999 "y.tab.c"
     break;
 
   case 72: /* FUNC_RPARAMS: EXP  */
-#line 406 "parser.y"
+#line 407 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_FUNC_CALL, 0, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
         }
-#line 2007 "y.tab.c"
+#line 2008 "y.tab.c"
     break;
 
   case 73: /* FUNC_RPARAMS: EXP COMMA FUNC_RPARAMS  */
-#line 411 "parser.y"
+#line 412 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 2016 "y.tab.c"
+#line 2017 "y.tab.c"
     break;
 
   case 74: /* PRIMARY_EXP: L_PAR EXP R_PAR  */
-#line 416 "parser.y"
+#line 417 "parser.y"
                              {(yyval.node) = (yyvsp[-1].node);}
-#line 2022 "y.tab.c"
+#line 2023 "y.tab.c"
     break;
 
   case 75: /* PRIMARY_EXP: LVAL  */
-#line 417 "parser.y"
+#line 418 "parser.y"
                              {(yyval.node) = (yyvsp[0].node);}
-#line 2028 "y.tab.c"
+#line 2029 "y.tab.c"
     break;
 
   case 76: /* PRIMARY_EXP: INTEGER  */
-#line 418 "parser.y"
+#line 419 "parser.y"
                              {(yyval.node) = (yyvsp[0].node);}
-#line 2034 "y.tab.c"
+#line 2035 "y.tab.c"
     break;
 
   case 77: /* LVAL: IDENTIFIER VAR_INDEXES  */
-#line 421 "parser.y"
+#line 422 "parser.y"
         {
             // option #2: indexing
             (yyval.node) = new_node(NONCONST_REST, TP_UNARY_EXP, 1, 0, 0, NULL, NULL);
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-1].node), 0);
         }
-#line 2045 "y.tab.c"
+#line 2046 "y.tab.c"
     break;
 
   case 78: /* LVAL: IDENTIFIER  */
-#line 429 "parser.y"
+#line 430 "parser.y"
         {
             (yyval.node) = (yyvsp[0].node);
         }
-#line 2053 "y.tab.c"
+#line 2054 "y.tab.c"
     break;
 
   case 79: /* REL_EXP: ADD_EXP  */
-#line 433 "parser.y"
+#line 434 "parser.y"
                      {(yyval.node) = (yyvsp[0].node);}
-#line 2059 "y.tab.c"
+#line 2060 "y.tab.c"
     break;
 
   case 80: /* REL_EXP: REL_EXP COMP_OP4 ADD_EXP  */
-#line 435 "parser.y"
+#line 436 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_BINARY_EXP, 0, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 2069 "y.tab.c"
+#line 2070 "y.tab.c"
     break;
 
   case 81: /* EQ_EXP: REL_EXP  */
-#line 441 "parser.y"
+#line 442 "parser.y"
                        {(yyval.node) = (yyvsp[0].node);}
-#line 2075 "y.tab.c"
+#line 2076 "y.tab.c"
     break;
 
   case 82: /* EQ_EXP: EQ_EXP EQUAL_OP5 REL_EXP  */
-#line 443 "parser.y"
+#line 444 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_BINARY_EXP, 0, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 2085 "y.tab.c"
+#line 2086 "y.tab.c"
     break;
 
   case 83: /* COND: LOR_EXP  */
-#line 449 "parser.y"
+#line 450 "parser.y"
               {(yyval.node) = (yyvsp[0].node);}
-#line 2091 "y.tab.c"
+#line 2092 "y.tab.c"
     break;
 
   case 84: /* LAND_EXP: EQ_EXP  */
-#line 451 "parser.y"
+#line 452 "parser.y"
                    {(yyval.node) = (yyvsp[0].node);}
-#line 2097 "y.tab.c"
+#line 2098 "y.tab.c"
     break;
 
   case 85: /* LAND_EXP: LAND_EXP AND_OP6 EQ_EXP  */
-#line 453 "parser.y"
+#line 454 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_BINARY_EXP, 0, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 2107 "y.tab.c"
+#line 2108 "y.tab.c"
     break;
 
   case 86: /* LOR_EXP: LAND_EXP  */
-#line 459 "parser.y"
+#line 460 "parser.y"
                      {(yyval.node) = (yyvsp[0].node);}
-#line 2113 "y.tab.c"
+#line 2114 "y.tab.c"
     break;
 
   case 87: /* LOR_EXP: LOR_EXP OR_OP7 LAND_EXP  */
-#line 461 "parser.y"
+#line 462 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_BINARY_EXP, 0, 0, 0, NULL, (yyvsp[-1].name));
             insert_sons((yyval.node), (yyvsp[0].node), 0);
             insert_sons((yyval.node), (yyvsp[-2].node), 0);
         }
-#line 2123 "y.tab.c"
+#line 2124 "y.tab.c"
     break;
 
   case 88: /* INTEGER: DECIMAL_TOK  */
-#line 468 "parser.y"
+#line 469 "parser.y"
         {
             if ((yyvsp[0].val) == 444){
                 (yyvsp[0].val)++;
@@ -2131,27 +2132,27 @@ yyreduce:
             }
             (yyval.node) = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_DEC, (yyvsp[0].val), NULL, NULL);
         }
-#line 2135 "y.tab.c"
+#line 2136 "y.tab.c"
     break;
 
   case 89: /* IDENTIFIER: IDENT  */
-#line 477 "parser.y"
+#line 478 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_IDENT, 0, (yyvsp[0].name), NULL);
         }
-#line 2143 "y.tab.c"
+#line 2144 "y.tab.c"
     break;
 
   case 90: /* IDENTIFIER_FUNC: IDENT_FUNC  */
-#line 482 "parser.y"
+#line 483 "parser.y"
         {
             (yyval.node) = new_node(NONCONST_REST, TP_TOKEN, 0, TOK_IDENT, 0, (yyvsp[0].name), NULL);
         }
-#line 2151 "y.tab.c"
+#line 2152 "y.tab.c"
     break;
 
 
-#line 2155 "y.tab.c"
+#line 2156 "y.tab.c"
 
       default: break;
     }
@@ -2345,20 +2346,26 @@ yyreturn:
   return yyresult;
 }
 
-#line 487 "parser.y"
+#line 488 "parser.y"
 
 
 int main(int argc, char* argv[]){
-    if (argc != 2){
-        printf("Usage: ./parser TARGET_FILE\n");
+    if (argc != 3){
+        printf("Usage: ./parser INPUT_SYSY_FILE OUTPUT_EEYORE_FILE\n");
         return 0;
     }
     FILE* inp_file = fopen(argv[1], "r");
+    FILE* oup_file = fopen(argv[2], "w");
     printf("%s\n", argv[1]);
     yyin = inp_file;
 
     tree_root = NULL;
     yyparse();
-    print_tree(tree_root);
+    //print_tree(tree_root);
+
+    generate_eeyore(tree_root, oup_file);
+
+    destruct_tree_completely(tree_root);
+    hash_table_clear();
     return 0;
 }

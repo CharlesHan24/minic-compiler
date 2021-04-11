@@ -13,11 +13,15 @@ typedef struct Var_Attrib{
     struct Var_Attrib* next;
     int var_id;
     char prefix;
+    int fake_id;
     int is_single;
-    int single_val;
+    
     int* index_array;
     int index_array_len;
     Init_List init_val;
+
+    int is_value;
+    int single_val;
 }Var_Attrib;
 
 typedef struct Hash_Bucket{
@@ -29,6 +33,7 @@ typedef struct Hash_Bucket{
 }Hash_Bucket;
 
 
+void init_var_table(int param_var_cnt, int original_var_cnt);
 
 int calc_hash(char* name);
 

@@ -8,7 +8,7 @@ static int tree_node_id = 0;
 
 Syntax_Tree* new_node(enum Restriction restric, enum Node_Type node_type,
     int option, enum Token_Type token_type, unsigned dec_val, char* ident_name, char* op_name){
-    Syntax_Tree* node = malloc(sizeof(Syntax_Tree));
+    Syntax_Tree* node = calloc(1, sizeof(Syntax_Tree));
 
     node->restric = restric;
     node->node_type = node_type;
@@ -154,9 +154,6 @@ void forward_const_label(Syntax_Tree* root){
         if (root->restric == CONST_REST){
             son->restric = CONST_REST;
         }
-        else{
-            son->restric = NONCONST_REST;
-        }
-        forward_const_label(root);
+        forward_const_label(son);
     }
 }

@@ -24,10 +24,17 @@ typedef struct Syntax_Tree{
     enum Token_Type token_type;
     int option;
     
-    unsigned dec_val;
+    int dec_val;
     char* ident_name;
     char* op_name;
     int node_id;
+
+    char var_prefix;
+    int var_id;
+    int fake_id;
+
+    int label_while_bg;
+    int label_while_ed;
 }Syntax_Tree;
 
 Syntax_Tree* new_node(enum Restriction restric, enum Node_Type node_type, 
@@ -38,5 +45,7 @@ void insert_sons(Syntax_Tree* cur_node, Syntax_Tree* targ_node, int flag);
 void print_tree(Syntax_Tree* root);
 
 void forward_const_label(Syntax_Tree* root);
+
+void destruct_tree_completely(Syntax_Tree* node);
 
 #endif

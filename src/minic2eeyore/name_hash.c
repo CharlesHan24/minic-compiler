@@ -6,6 +6,14 @@ static int hash_base = 233;
 
 Hash_Bucket* hash_table[TABLE_SIZE];
 
+Var_Attrib* param_attrib;
+Var_Attrib* original_var_attrib;
+
+void init_var_table(int param_var_cnt, int original_var_cnt){
+    param_attrib = calloc(sizeof(Var_Attrib) * param_var_cnt, 1);
+    original_var_attrib = calloc(sizeof(Var_Attrib) * original_var_cnt, 1);
+}
+
 int calc_hash(char* name){
     int len = strlen(name);
     int hash_val = 0;
