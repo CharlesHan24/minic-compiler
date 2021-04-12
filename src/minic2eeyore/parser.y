@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <getopt.h>
-#include "./constants.h"
+#include "./utils.h"
 #include <errno.h>
 #include "./syntax_tree.h"
 #include "./name_hash.h"
@@ -310,7 +310,7 @@ STMT:    COLON
             insert_sons($$, $3, 0);
             insert_sons($$, $1, 0);
         }
-    |   EXP
+    |   EXP COLON
         {
             $$ = new_node(NONCONST_REST, TP_STMT, 1, 0, 0, NULL, NULL);
             insert_sons($$, $1, 0);
@@ -493,11 +493,12 @@ void parse_args(int argc, char* argv[], FILE** fin, FILE** fout){
     static struct option long_options[] = {
         {"inp_file", required_argument, 0, 'e' },
         {"oup_file", required_argument, 0, 'o'},
+        {"lan_opt", optional_argument, 0, 'S'},
         {0, 0, 0, 0},
     };
 
 	int long_index = 0;
-	while ((opt = getopt_long(argc, argv, "e:o:", 
+	while ((opt = getopt_long(argc, argv, "e:o:S", 
                    long_options, &long_index)) != -1) {
         switch (opt) {
 			case 'e' :
@@ -505,6 +506,8 @@ void parse_args(int argc, char* argv[], FILE** fin, FILE** fout){
 				break;
             case 'o':
                 *fout = fopen(optarg, "w");
+                break;
+            case 'S':
                 break;
 			default:
 				printf("Usage: ./minic2eeyore -S -e testcase.c -o testcase.S\n");

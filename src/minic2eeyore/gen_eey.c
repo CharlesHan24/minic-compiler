@@ -201,8 +201,6 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
             }
             
             case TP_FUNC_DEF:{
-                func_regist(root->head_son->next_sib->ident_name, root->head_son->token_type == TOK_INT);
-
                 if (root->option == 0){
                     fprintf(fout, "f_%s [0]\n", root->head_son->next_sib->ident_name);
                 }
@@ -288,7 +286,12 @@ static int dfs_generate(Syntax_Tree* root, FILE* fout, const Prov_Params* prov_p
                     }
                 }
                 if (root->option == 0){
-                    fprintf(fout, "%c%d = %s%c%d\n", root->var_prefix, root->var_id, root->op_name, root->head_son->var_prefix, root->head_son->var_id);
+                    if (root->op_name[0] == '+'){
+                        fprintf(fout, "%c%d = %c%d\n", root->var_prefix, root->var_id, root->head_son->var_prefix, root->head_son->var_id);
+                    }
+                    else{
+                        fprintf(fout, "%c%d = %s%c%d\n", root->var_prefix, root->var_id, root->op_name, root->head_son->var_prefix, root->head_son->var_id);
+                    }
                 }
                 else{
                     if ((next_ret_param.dimension_match) || ((root->father->node_type == TP_STMT) && (root->father->head_son == root) && (root->father->option == 0))){
@@ -688,6 +691,18 @@ static int dfs_count_def(Syntax_Tree* root){
 //     return res;
 // }
 
+void recursive_func_register(Syntax_Tree* root){
+    if (root->node_type == TP_FUNC_DEF){
+        func_regist(root->head_son->next_sib->ident_name, root->head_son->token_type == TOK_INT);
+        return;
+    }
+    else{
+        for (Syntax_Tree* son = root->head_son; son != NULL; son = son->next_sib){
+            recursive_func_register(son);
+        }
+    }
+}
+
 void generate_eeyore(Syntax_Tree* root, FILE* fout){
     tree_root = root;
 
@@ -703,6 +718,8 @@ void generate_eeyore(Syntax_Tree* root, FILE* fout){
     func_regist("putf", 0);
     func_regist("starttime", 0);
     func_regist("stoptime", 0);
+
+    recursive_func_register(root);
 
     forward_const_label(root);
     // if (!check_const(root)){

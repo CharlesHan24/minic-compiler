@@ -2,8 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "./constants.h"
+#include "./utils.h"
 #include <errno.h>
+#include <ctype.h>
 #include "y.tab.h"
 
 extern FILE* yyin;
@@ -47,7 +48,7 @@ int is_comment(){
 %}
 
 SL_COMMENT \/\/
-NEW_LINE \n
+NEW_LINE \n|\t|\r|\v|\f
 SPACE [ ]
 ML_COMMENT_BGN \/\*
 ML_COMMENT_END \*\/
@@ -101,7 +102,7 @@ OTHER_TEXT .
         if (cur_state == LEXER_NEW_NUM){
             print_error();
         }
-        yylval.name = strdup(yytext);
+        yylval.name = mystrdup(yytext);
         switch (yytext[0]){
             case 'w':{
                 return WHILE;
@@ -130,7 +131,7 @@ OTHER_TEXT .
 {EXP_SYMB} {
     if (!is_comment()){
         reset_lexer_state();
-        yylval.name = strdup(yytext);
+        yylval.name = mystrdup(yytext);
         switch (yytext[0]){
             case '+':{
                 return ADDMIN_OP3;
@@ -167,7 +168,7 @@ OTHER_TEXT .
 {SYNT_SYMB} {
     if (!is_comment()){
         reset_lexer_state();
-        yylval.name = strdup(yytext);
+        yylval.name = mystrdup(yytext);
         switch (yytext[0]){
             case '[':{
                 return L_SBRAC;
@@ -241,7 +242,7 @@ OTHER_TEXT .
                 meet_lpar = 1;
                 break;
             }
-            if ((tmp != '\n') && (tmp != ' ')){
+            if (!isspace(tmp)){
                 break;
             }
         }
@@ -249,7 +250,7 @@ OTHER_TEXT .
         if (cur_state == LEXER_NEW_NUM){
             print_error();
         }
-        yylval.name = strdup(yytext);
+        yylval.name = mystrdup(yytext);
 
         if (meet_lpar != 1){
             fseek(yyin, cur_pos + 1, SEEK_SET);

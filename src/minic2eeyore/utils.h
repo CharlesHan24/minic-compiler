@@ -1,6 +1,5 @@
-#ifndef _CONSTANTS_H
-#define _CONSTANTS_H
-
+#ifndef _UTILS_H
+#define _UTILS_H
 
 enum Node_Type{
     TP_COMP_UNIT,
@@ -34,6 +33,7 @@ enum Token_Type{
     TOK_NONE,
 };
 
+char* mystrdup(const char *str);
 
 
 #endif
