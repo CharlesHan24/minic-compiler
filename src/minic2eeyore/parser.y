@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <getopt.h>
 #include "./constants.h"
 #include <errno.h>
 #include "./syntax_tree.h"
@@ -487,14 +488,37 @@ IDENTIFIER_FUNC:    IDENT_FUNC
 
 %%
 
-int main(int argc, char* argv[]){
-    if (argc != 3){
-        printf("Usage: ./parser INPUT_SYSY_FILE OUTPUT_EEYORE_FILE\n");
-        return 0;
+void parse_args(int argc, char* argv[], FILE** fin, FILE** fout){
+    int opt = 0;
+    static struct option long_options[] = {
+        {"inp_file", required_argument, 0, 'e' },
+        {"oup_file", required_argument, 0, 'o'},
+        {0, 0, 0, 0},
+    };
+
+	int long_index = 0;
+	while ((opt = getopt_long(argc, argv, "e:o:", 
+                   long_options, &long_index)) != -1) {
+        switch (opt) {
+			case 'e' :
+				*fin = fopen(optarg, "r");
+				break;
+            case 'o':
+                *fout = fopen(optarg, "w");
+                break;
+			default:
+				printf("Usage: ./minic2eeyore -S -e testcase.c -o testcase.S\n");
+				exit(0);
+        }
     }
-    FILE* inp_file = fopen(argv[1], "r");
-    FILE* oup_file = fopen(argv[2], "w");
-    printf("%s\n", argv[1]);
+}
+
+int main(int argc, char* argv[]){
+    FILE* inp_file;
+    FILE* oup_file;
+
+    parse_args(argc, argv, &inp_file, &oup_file);
+
     yyin = inp_file;
 
     tree_root = NULL;
