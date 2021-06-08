@@ -5,10 +5,14 @@
 
 char* mystrdup(const char* str){
     size_t len = strlen(str);
-    char *x = (char *)malloc(len+1);
-    if(!x){
+    char* x = (char*)malloc(len + 1);
+    if (!x){
         return NULL;
     }
-    memcpy(x,str,len+1);
+    memcpy(x, str, len + 1);
     return x;
+}
+
+int is_digit(char x){
+    return ((x >= '0') && (x <= '9'));
 }
