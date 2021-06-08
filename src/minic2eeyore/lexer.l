@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "./utils.h"
+#include "utils.h"
 #include <errno.h>
 #include <ctype.h>
 #include "y.tab.h"

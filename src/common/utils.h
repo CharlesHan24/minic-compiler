@@ -36,4 +36,7 @@ enum Token_Type{
 char* mystrdup(const char *str);
 int is_digit(char x);
 
+#define max(x, y) (x > y? x: y)
+#define min(x, y) (x < y? x: y)
+
 #endif

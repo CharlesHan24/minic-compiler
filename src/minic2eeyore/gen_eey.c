@@ -1,5 +1,5 @@
 #include "gen_eey.h"
-#include "./name_hash.h"
+#include "name_hash.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

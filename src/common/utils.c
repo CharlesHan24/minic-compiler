@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 char* mystrdup(const char* str){
+    if (str == NULL){
+        return NULL;
+    }
     size_t len = strlen(str);
     char* x = (char*)malloc(len + 1);
     if (!x){

@@ -4,6 +4,7 @@
         "array": "c",
         "hash_map": "c",
         "hash_set": "c",
-        "string_view": "c"
+        "string_view": "c",
+        "y.tab.h": "c"
     }
 }

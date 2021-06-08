@@ -1,4 +1,4 @@
-#include "./syntax_tree.h"
+#include "syntax_tree.h"
 #include <malloc.h>
 #include <string.h>
 #include <stdlib.h>

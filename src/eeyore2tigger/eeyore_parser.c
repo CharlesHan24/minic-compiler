@@ -109,9 +109,10 @@ void eeyore_parser(FILE* fin){
                 break;
             }
             case 'f':{
+                sscanf(buffer, "%s %s", words[0], words[1]);
                 words[1][strlen(words[1]) - 1] = 0;
-                program.functions = new_func(&program.functions, atoi(words[1]), words[0] + 2);
-                cur_func = &program.functions;
+                program.functions = new_func(program.functions, atoi(words[1] + 1), words[0] + 2);
+                cur_func = program.functions;
                 cur_func->max_var_id = 8;
                 context.in_func = 1;
                 break;
@@ -133,6 +134,7 @@ void eeyore_parser(FILE* fin){
                     cur_instruct = next_instruct;
                     next_instruct = tmp;
                 }
+                cur_func->instructs = cur_instruct;
                 break;
             }
             case 'l':{
@@ -166,7 +168,7 @@ void eeyore_parser(FILE* fin){
             }
             case 'c':{
                 sscanf(buffer, "%s%s", words[0], words[1]);
-                cur_func->instructs = new_instruct(cur_func->instructs, tmp_var, 0, EEY_FUNC_CALL, NULL, NULL, words[1]);
+                cur_func->instructs = new_instruct(cur_func->instructs, tmp_var, 0, EEY_FUNC_CALL, NULL, words[1], NULL);
                 break;
             }
             case 'i':{
@@ -184,8 +186,12 @@ void eeyore_parser(FILE* fin){
                 if (cnt == 4){
                     tmp_var[0] = parse_var(words[0]);
                     tmp_var[1] = parse_var(words[1]);
-                    tmp_var[2] = parse_var(words[2]);
+                    tmp_var[2] = parse_var(words[3]);
                     cur_func->instructs = new_instruct(cur_func->instructs, tmp_var, EEY_ARITH, EEY_EXP, words[2], NULL, NULL);
+                }
+                else if (cnt == 3){
+                    tmp_var[0] = parse_var(words[0]);
+                    cur_func->instructs = new_instruct(cur_func->instructs, tmp_var, 0, EEY_FUNC_CALL, NULL, words[2], NULL);
                 }
                 else if ((words[1][0] == '-') || (words[1][0] == '!')){
                     tmp_var[0] = parse_var(words[0]);

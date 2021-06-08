@@ -7,10 +7,11 @@
 extern eeyore_program program;
 #define BUFFER_LEN 1000
 
-static void eey_new_tab(eey_localvar* var, int is_reg, int address, char prefix, int id){
+static void eey_new_tab(eey_localvar* var, int is_reg, int address, char prefix, int id, int is_array){
     var->is_reg = is_reg;
     var->address = address;
     var->reg_name[0] = prefix;
+    var->is_array = is_array;
     sprintf(var->reg_name + 1, "%d", id);
 }
 
@@ -20,19 +21,30 @@ static void tigger_load_var(FILE* fout, eeyore_vars* var, eeyore_context* contex
         return;
     }
     if (context->symtab.max_localvar_id > var->var_id){
+        int is_array = context->symtab.local_var[var->var_type][var->var_id].is_array;
+        if (is_array == 1){
+            fprintf(fout, "loadaddr %d %s\n", context->symtab.local_var[var->var_type][var->var_id].address, assigned_reg);
+            sprintf(result, "%s", assigned_reg);
+            return;
+        }
         if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 1){
             sprintf(result, "%s", context->symtab.local_var[var->var_type][var->var_id].reg_name);
             return;
         }
         else if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
-            fprintf(fout, "load %s %s\n", context->symtab.local_var[var->var_type][var->var_id].address, assigned_reg);
+            fprintf(fout, "load %d %s\n", context->symtab.local_var[var->var_type][var->var_id].address, assigned_reg);
             sprintf(result, "%s", assigned_reg);
             return;
         }
     }
     
     // global var
-    fprintf(fout, "load v%s %s\n", context->symtab.global_var[var->var_type][var->var_id], assigned_reg);
+    if (context->symtab.global_is_array[var->var_type][var->var_id] == 1){
+        fprintf(fout, "loadaddr v%d %s\n", context->symtab.global_var[var->var_type][var->var_id], assigned_reg);
+    }
+    else{
+        fprintf(fout, "load v%d %s\n", context->symtab.global_var[var->var_type][var->var_id], assigned_reg);
+    }
     sprintf(result, "%s", assigned_reg);
 }
 
@@ -53,13 +65,15 @@ static void tigger_store_var(FILE* fout, eeyore_vars* var, eeyore_context* conte
             return;
         }
         else if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
-            fprintf(fout, "store %s %s\n", assigned_reg, context->symtab.local_var[var->var_type][var->var_id].address);
+            fprintf(fout, "store %s %d\n", assigned_reg, context->symtab.local_var[var->var_type][var->var_id].address);
             return;
         }
     }
     
     // global var
-    fprintf(fout, "store %s v%s\n", assigned_reg, context->symtab.global_var[var->var_type][var->var_id]);
+    // fprintf(fout, "store %s v%d\n", assigned_reg, context->symtab.global_var[var->var_type][var->var_id]);
+    fprintf(fout, "loadaddr v%d s11\n", context->symtab.global_var[var->var_type][var->var_id]);
+    fprintf(fout, "s11[0] = %s\n", assigned_reg);
 }
 
 static int tigger_load_array(FILE* fout, eeyore_vars* var, eeyore_context* context, const char* assigned_reg){
@@ -72,6 +86,16 @@ static int tigger_load_array(FILE* fout, eeyore_vars* var, eeyore_context* conte
         tigger_load_var(fout, &tmp_var, context, "s11", tmp_result);
     }
     if (context->symtab.max_localvar_id > var->var_id){
+        if (context->symtab.local_var[var->var_type][var->var_id].is_array == 0){
+            if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
+                fprintf(fout, "load %d %s\n", context->symtab.local_var[var->var_type][var->var_id].address, assigned_reg);
+                return 1;
+            }
+            else if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 1){
+                fprintf(fout, "%s = %s\n", assigned_reg, context->symtab.local_var[var->var_type][var->var_id].reg_name);
+                return 1;
+            }
+        }
         if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
             if (var->length == -1){
                 fprintf(fout, "%s = %s + %d\n", assigned_reg, tmp_result, context->symtab.local_var[var->var_type][var->var_id].address);
@@ -86,8 +110,13 @@ static int tigger_load_array(FILE* fout, eeyore_vars* var, eeyore_context* conte
     
     // global var
 
-    fprintf(fout, "loadaddr v%s %s\n", context->symtab.global_var[var->var_type][var->var_id], assigned_reg);
+    
 
+    if (!context->symtab.global_is_array[var->var_type][var->var_id]){
+        fprintf(fout, "%s = v%d\n", assigned_reg, context->symtab.global_var[var->var_type][var->var_id]);
+        return 1;
+    }
+    fprintf(fout, "loadaddr v%d %s\n", context->symtab.global_var[var->var_type][var->var_id], assigned_reg);
     if (var->length == -1){
         fprintf(fout, "%s = %s + %s\n", assigned_reg, assigned_reg, tmp_result);
         return 1;
@@ -108,6 +137,16 @@ static void tigger_store_array(FILE* fout, eeyore_vars* var, eeyore_context* con
         tigger_load_var(fout, &tmp_var, context, "s11", tmp_result);
     }
     if (context->symtab.max_localvar_id > var->var_id){
+        if (context->symtab.local_var[var->var_type][var->var_id].is_array == 0){
+            if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
+                fprintf(fout, "load %d s11\n", context->symtab.local_var[var->var_type][var->var_id].address);
+                fprintf(fout, "s11[0] = %s\n", assigned_reg);
+            }
+            else{
+                fprintf(fout, "%s[0] = %s\n", context->symtab.local_var[var->var_type][var->var_id].reg_name, assigned_reg);
+            }
+            return;
+        }
         if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
             if (var->length == -1){
                 fprintf(fout, "s11 = %s + %d\n", tmp_result, context->symtab.local_var[var->var_type][var->var_id].address);
@@ -120,8 +159,13 @@ static void tigger_store_array(FILE* fout, eeyore_vars* var, eeyore_context* con
         }
     }
 
-    fprintf(fout, "loadaddr v%s s10\n", context->symtab.global_var[var->var_type][var->var_id]);
 
+    if (!context->symtab.global_is_array[var->var_type][var->var_id]){
+        fprintf(fout, "load v%d s11\n", context->symtab.global_var[var->var_type][var->var_id]);
+        fprintf(fout, "%s[0] = s11\n", assigned_reg);
+        return;
+    }
+    fprintf(fout, "loadaddr v%d s10\n", context->symtab.global_var[var->var_type][var->var_id]);
     if (var->length == -1){
         fprintf(fout, "s11 = s10 + %s\n", tmp_result);
         fprintf(fout, "s11[0] = %s\n", assigned_reg);
@@ -141,7 +185,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
         context->symtab.max_localvar_id = function->max_var_id;
     }
     for (int i = 0; i < function->param_cnt; i++){
-        eey_new_tab(&context->symtab.local_var[2][i], 1, 0, 'a', i);
+        eey_new_tab(&context->symtab.local_var[2][i], 1, 0, 'a', i, 0);
     }
 
     // register allocation
@@ -152,15 +196,16 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
 
     for (eeyore_vars* var = function->vars; var != NULL; var = var->next){
         if (var->option == EEY_VAR_ARRAY){
-            eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 0, cur_address >> 2, 0, 0);
+            eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 0, cur_address >> 2, 0, 0, 1);
             cur_address += var->length;
         }
         else if (num_of_reg == 6){
-            eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 0, cur_address >> 2, 0, 0);
+            eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 0, cur_address >> 2, 0, 0, 0);
             cur_address += 4;
         }
         else{
-            eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 0, 0, 't', num_of_reg);
+            eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 1, 0, 't', num_of_reg, 0);
+            num_of_reg++;
         }
     }
     
@@ -179,6 +224,9 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                 }
                 if (instruct->vars[0] != NULL){
                     tigger_load_var(fout, instruct->vars[0], context, "a0", buffer[0]);
+                    if (strcmp(buffer[0], "a0") != 0){
+                        fprintf(fout, "a0 = %s\n", buffer[0]);
+                    }
                 }
                 fprintf(fout, "return\n");
                 break;
@@ -193,7 +241,12 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
             }
             case EEY_IF_GOTO:{
                 tigger_load_var(fout, instruct->vars[0], context, "s0", buffer[0]);
-                tigger_load_var(fout, instruct->vars[1], context, "s0", buffer[1]);
+                tigger_load_var(fout, instruct->vars[1], context, "s1", buffer[1]);
+                if (is_digit(buffer[1][0])){
+                    fprintf(fout, "s1 = %d\n", atoi(buffer[1]));
+                    sprintf(buffer[1], "s1");
+                }
+
                 fprintf(fout, "if %s %s %s goto %s\n", buffer[0], instruct->arith, buffer[1], instruct->label_name);
                 break;
             }
@@ -208,6 +261,9 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
             case EEY_FUNC_CALL:{
                 param_id = 0;
                 fprintf(fout, "call %s\n", instruct->func_call_name);
+                if (instruct->vars[0] != NULL){
+                    tigger_store_var(fout, instruct->vars[0], context, "a0");
+                }
                 break;
             }
             case EEY_EXP:{
@@ -224,7 +280,12 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                     if (!tigger_reg(fout, instruct->vars[0], context, buffer[1])){
                         sprintf(buffer[1], "s2");
                     }
-                    fprintf(fout, "%s = %s%s\n", buffer[1], instruct->arith, buffer[0]);
+                    if ((instruct->arith[0] == '!') && (is_digit(buffer[0][0]))){
+                        fprintf(fout, "%s = %d\n", buffer[1], !(atoi(buffer[0])));
+                    }
+                    else{
+                        fprintf(fout, "%s = %s%s\n", buffer[1], instruct->arith, buffer[0]);
+                    }
                     tigger_store_var(fout, instruct->vars[0], context, buffer[1]);
                 }
                 else if (instruct->option == EEY_ARITH){
@@ -277,6 +338,7 @@ void tigger_generator(FILE* fout){
 
     for (int i = 0; i < 2; i++){
         context.symtab.global_var[i] = calloc(program.max_var_id, 4);
+        context.symtab.global_is_array[i] = calloc(program.max_var_id, 4);
         for (int j = 0; j < program.max_var_id; j++){
             context.symtab.global_var[i][j] = -1;
         }
@@ -290,6 +352,7 @@ void tigger_generator(FILE* fout){
             fprintf(fout, "v%d = 0\n", global_id);
         }
         context.symtab.global_var[var->var_type][var->var_id] = global_id;
+        context.symtab.global_is_array[var->var_type][var->var_id] = var->option == EEY_VAR_ARRAY;
         global_id++;
     }
 

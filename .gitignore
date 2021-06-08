@@ -31,3 +31,8 @@
 *.out
 *.app:
 ./open-test-cases/**
+**/bin/**
+**/lib/**
+**/CMakeFiles/**
+**/CMakeCache.txt
+**/cmake_install.cmake

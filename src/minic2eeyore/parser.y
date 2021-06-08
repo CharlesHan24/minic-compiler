@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <getopt.h>
-#include "./utils.h"
+#include "utils.h"
 #include <errno.h>
-#include "./syntax_tree.h"
-#include "./name_hash.h"
-#include "./gen_eey.h"
+#include "syntax_tree.h"
+#include "name_hash.h"
+#include "gen_eey.h"
 
 //int yydebug = 1;
 extern FILE* yyin;
@@ -487,50 +487,13 @@ IDENTIFIER_FUNC:    IDENT_FUNC
 ;
 
 %%
-
-void parse_args(int argc, char* argv[], FILE** fin, FILE** fout){
-    int opt = 0;
-    static struct option long_options[] = {
-        {"inp_file", required_argument, 0, 'e' },
-        {"oup_file", required_argument, 0, 'o'},
-        {"lan_opt", optional_argument, 0, 'S'},
-        {0, 0, 0, 0},
-    };
-
-	int long_index = 0;
-	while ((opt = getopt_long(argc, argv, "e:o:S", 
-                   long_options, &long_index)) != -1) {
-        switch (opt) {
-			case 'e' :
-				*fin = fopen(optarg, "r");
-				break;
-            case 'o':
-                *fout = fopen(optarg, "w");
-                break;
-            case 'S':
-                break;
-			default:
-				printf("Usage: ./minic2eeyore -S -e testcase.c -o testcase.S\n");
-				exit(0);
-        }
-    }
-}
-
-int main(int argc, char* argv[]){
-    FILE* inp_file;
-    FILE* oup_file;
-
-    parse_args(argc, argv, &inp_file, &oup_file);
-
+void minic2eeyore(FILE* inp_file, FILE* oup_file){
     yyin = inp_file;
 
     tree_root = NULL;
     yyparse();
-    //print_tree(tree_root);
 
     generate_eeyore(tree_root, oup_file);
 
     destruct_tree_completely(tree_root);
-    
-    return 0;
 }

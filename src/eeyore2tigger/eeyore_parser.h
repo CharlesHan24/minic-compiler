@@ -36,7 +36,7 @@ typedef struct eeyore_vars{
     int var_id;
     char index_var_type;
     int index_var_id;
-    eeyore_vars* next;
+    struct eeyore_vars* next;
 }eeyore_vars;
 
 typedef struct eeyore_instruct{
@@ -46,7 +46,7 @@ typedef struct eeyore_instruct{
     char* arith;
     char* func_call_name;
     char* label_name;
-    eeyore_instruct* next;
+    struct eeyore_instruct* next;
 }eeyore_instruct;
 
 typedef struct eeyore_function{
@@ -56,7 +56,7 @@ typedef struct eeyore_function{
     int ints_of_vars;
     int max_var_id;
     char* func_name;
-    eeyore_function* next;
+    struct eeyore_function* next;
 }eeyore_function;
 
 typedef struct eeyore_program{
