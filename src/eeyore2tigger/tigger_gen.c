@@ -285,7 +285,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                 fprintf(fout, "store %s %d\n", buffer[1], param_id);
                 tigger_load_var(fout, instruct->vars[0], context, buffer[1], buffer[0]);
                 if (strcmp(buffer[0], buffer[1]) != 0){
-                    if (instruct->vars[0]->var_type != 2){
+                    if ((instruct->vars[0]->var_type != 2) || (instruct->vars[0]->var_id > param_id)){
                         fprintf(fout, "%s = %s\n", buffer[1], buffer[0]);
                     }
                     else{
