@@ -244,7 +244,7 @@ static void riscv_output(FILE* fout, char* code){
                 }
                 else{
                     fprintf(fout, "li t3, %d\n", tmp * 4);
-                    fprintf(fout, "add t3 t3 sp\n");
+                    fprintf(fout, "add t3, t3, sp\n");
                     fprintf(fout, "sw %s, 0(t3)\n", words[1]);
                 }
                 break;
