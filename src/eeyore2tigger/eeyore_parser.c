@@ -216,4 +216,21 @@ void eeyore_parser(FILE* fin){
             }
         }
     }
+
+    eeyore_function* cur_function;
+    eeyore_function* next_function;
+    eeyore_function* tmp;
+    cur_function = program.functions;
+    if (cur_function == NULL){
+        return;
+    }
+    next_function = cur_function->next;
+    cur_function->next = NULL;
+    while (next_function != NULL){
+        tmp = next_function->next;
+        next_function->next = cur_function;
+        cur_function = next_function;
+        next_function = tmp;
+    }
+    program.functions = cur_function;
 }

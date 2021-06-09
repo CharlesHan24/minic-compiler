@@ -11,11 +11,11 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED 11)
 set(CMAKE_C_FLAGS "-g")
 
-file(GLOB includes "eeyore2tigger/*.h" "common/*.h" "minic2eeyore/*.h")
-file(GLOB sources "eeyore2tigger/*.c" "common/*.c" "minic2eeyore/*.c")
+file(GLOB includes "eeyore2tigger/*.h" "common/*.h" "minic2eeyore/*.h" "tigger2riscv/*.h")
+file(GLOB sources "eeyore2tigger/*.c" "common/*.c" "minic2eeyore/*.c" "tigger2riscv/*.c")
 
 
-include_directories("eeyore2tigger/" "minic2eeyore/" "common")
+include_directories("eeyore2tigger/" "minic2eeyore/" "common/" "tigger2riscv/")
 
 add_library(${lib_name} SHARED ${includes} ${sources})
 

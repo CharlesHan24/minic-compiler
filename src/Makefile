@@ -358,6 +358,30 @@ minic2eeyore/y.tab.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/minic-compiler.dir/build.make CMakeFiles/minic-compiler.dir/minic2eeyore/y.tab.c.s
 .PHONY : minic2eeyore/y.tab.c.s
 
+tigger2riscv/riscv_translate.o: tigger2riscv/riscv_translate.c.o
+.PHONY : tigger2riscv/riscv_translate.o
+
+# target to build an object file
+tigger2riscv/riscv_translate.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minic-compiler.dir/build.make CMakeFiles/minic-compiler.dir/tigger2riscv/riscv_translate.c.o
+.PHONY : tigger2riscv/riscv_translate.c.o
+
+tigger2riscv/riscv_translate.i: tigger2riscv/riscv_translate.c.i
+.PHONY : tigger2riscv/riscv_translate.i
+
+# target to preprocess a source file
+tigger2riscv/riscv_translate.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minic-compiler.dir/build.make CMakeFiles/minic-compiler.dir/tigger2riscv/riscv_translate.c.i
+.PHONY : tigger2riscv/riscv_translate.c.i
+
+tigger2riscv/riscv_translate.s: tigger2riscv/riscv_translate.c.s
+.PHONY : tigger2riscv/riscv_translate.s
+
+# target to generate assembly for a file
+tigger2riscv/riscv_translate.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/minic-compiler.dir/build.make CMakeFiles/minic-compiler.dir/tigger2riscv/riscv_translate.c.s
+.PHONY : tigger2riscv/riscv_translate.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -395,6 +419,9 @@ help:
 	@echo "... minic2eeyore/y.tab.o"
 	@echo "... minic2eeyore/y.tab.i"
 	@echo "... minic2eeyore/y.tab.s"
+	@echo "... tigger2riscv/riscv_translate.o"
+	@echo "... tigger2riscv/riscv_translate.i"
+	@echo "... tigger2riscv/riscv_translate.s"
 .PHONY : help
 
 

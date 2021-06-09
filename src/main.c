@@ -2,6 +2,7 @@
 #include "utils.h"
 #include "eeyore_parser.h"
 #include "tigger_gen.h"
+#include "riscv_translate.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <getopt.h>
@@ -19,7 +20,7 @@ int parse_args(int argc, char* argv[], FILE** fin, FILE** fout, char** fout_name
         {0, 0, 0, 0},
     };
 
-    int mode;
+    int mode = 2;
 
 	int long_index = 0;
 	while ((opt = getopt_long(argc, argv, "t:e:o:S", 
@@ -44,6 +45,9 @@ int parse_args(int argc, char* argv[], FILE** fin, FILE** fout, char** fout_name
 				exit(0);
         }
     }
+    if (mode == 2){
+        *fin = fopen(argv[4], "r");
+    }
     return mode;
 }
 
@@ -64,14 +68,18 @@ int main(int argc, char* argv[]){
         eeyore_parser(inp_file);
         fclose(inp_file);
 
-        #ifdef DEBUG_MODE
-            sprintf(fout_name, "tigger.txt");
-        #endif
-
         oup_file = fopen(fout_name, "w");
         tigger_generator(oup_file);
         fflush(oup_file);
         fclose(oup_file);
+
+        if (mode >= 2){
+            #ifdef DEBUG_MODE
+                tigger2riscv_translate(fout_name, "riscv.S");
+            #else
+                tigger2riscv_translate(fout_name, fout_name);
+            #endif
+        }
     }
 
     return 0;
