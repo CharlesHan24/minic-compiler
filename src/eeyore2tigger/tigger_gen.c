@@ -156,11 +156,12 @@ static void tigger_store_array(FILE* fout, eeyore_vars* var, eeyore_context* con
             if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
                 fprintf(fout, "load %d s11\n", context->symtab.local_var[var->var_type][var->var_id].address);
                 fprintf(fout, "s11[0] = %s\n", assigned_reg);
+                return;
             }
-            else{
+            else if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 1){
                 fprintf(fout, "%s[0] = %s\n", context->symtab.local_var[var->var_type][var->var_id].reg_name, assigned_reg);
+                return;
             }
-            return;
         }
         if (context->symtab.local_var[var->var_type][var->var_id].is_reg >= 0){
             if (context->symtab.local_var[var->var_type][var->var_id].is_reg){

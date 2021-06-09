@@ -7,16 +7,18 @@ src = glob.glob("../../open-test-cases/sysy/section1/functional_test/*.sy")
 file_all = glob.glob("../../open-test-cases/sysy/section1/functional_test/*")
 
 for src_file in src:
-    os.system("./minic2eeyore -S -e %s -o ../../data/example.e" % src_file)
+    if int(src_file[52:54]) > 96:
+        continue
+    os.system("./main -S -t %s -o ../../data/example.t" % src_file)
     print(src_file)
     print("")
     prefix = src_file[:-2]
     inp_name = prefix + "in"
     if inp_name in file_all:
-        ret_code = os.system("./minivm ../../data/example.e < %s > ../../data/example.out" % inp_name)
+        ret_code = os.system("./minivm ../../data/example.t < %s > ../../data/example.out" % inp_name)
     
     else:
-        ret_code = os.system("./minivm ../../data/example.e > ../../data/example.out")
+        ret_code = os.system("./minivm ../../data/example.t > ../../data/example.out")
 
     #pdb.set_trace()
     ret_code = ret_code >> 8
@@ -24,6 +26,6 @@ for src_file in src:
     fout.write("\n%d\n" % ret_code)
     fout.close()
     oup_name = prefix + "out"
-    os.system("diff ../../data/example.out %s" % oup_name)
-    time.sleep(1)
+    os.system("diff  -w ../../data/example.out %s" % oup_name)
+    time.sleep(0.00001)
         
