@@ -7,6 +7,8 @@
 extern eeyore_program program;
 #define BUFFER_LEN 1000
 
+#define EEYORE_OPTIMIZE
+
 static void eey_new_tab(eey_localvar* var, int is_reg, int address, char prefix, int id, int is_array){
     var->is_reg = is_reg;
     var->address = address;
@@ -206,6 +208,15 @@ static void tigger_store_array(FILE* fout, eeyore_vars* var, eeyore_context* con
     }
 }
 
+static int comp(const void * elem1, const void * elem2) {
+    int f = *((int*)elem1);
+    int s = *((int*)elem2);
+    if (f > s) return  -1;
+    if (f < s) return 1;
+    return 0;
+}
+
+
 static void tigger_gen_func(eeyore_function* function, eeyore_context* context, FILE* fout){
     for (int i = 0; i < 3; i++){
         context->symtab.local_var[i] = calloc(function->max_var_id, sizeof(eey_localvar));
@@ -224,6 +235,64 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
     int param_id = 0;
     char buffer[3][BUFFER_LEN];
 
+    #ifdef EEYORE_OPTIMIZE
+        int* appear_cnt[3];
+        for (int i = 0; i < 3; i++){
+            appear_cnt[i] = calloc(function->max_var_id, 4);
+        }
+        for (eeyore_instruct* instruct = function->instructs; instruct != NULL; instruct = instruct->next){
+            for (int i = 0; i < 3; i++){
+                if (instruct->vars[i] != NULL){
+                    if (instruct->vars[i]->var_id < function->max_var_id){
+                        appear_cnt[instruct->vars[i]->var_type][instruct->vars[i]->var_id]++;
+                    }
+                }
+            }
+        }
+        int* overall_cnt = calloc(max(12, function->max_var_id * 3), 4);
+        int top = 0;
+        for (eeyore_vars* var = function->vars; var != NULL; var = var->next){
+            if (var->option != EEY_VAR_ARRAY){
+                overall_cnt[top++] = appear_cnt[var->var_type][var->var_id];
+            }
+        }
+        qsort((void*)overall_cnt, top, 4, comp);
+        //printf("%d %d\n", overall_cnt[0], overall_cnt[11]);
+
+        int same_rank = 0;
+        if (top >= 11){
+            for (int i = 11; i; i--){
+                if (overall_cnt[i] > overall_cnt[11]){
+                    same_rank = 11 - i;
+                    break;
+                }
+            }
+            if (!same_rank){
+                same_rank = 12;
+            }
+        }
+        else{
+            overall_cnt[11] = -1;
+        }
+        for (eeyore_vars* var = function->vars; var != NULL; var = var->next){
+            if (var->option == EEY_VAR_ARRAY){
+                eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 0, cur_address >> 2, 0, 0, 1);
+                cur_address += var->length;
+            }
+            else if ((appear_cnt[var->var_type][var->var_id] < overall_cnt[11]) || (((appear_cnt[var->var_type][var->var_id] == overall_cnt[11])) && (!same_rank))){
+                eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 0, cur_address >> 2, 0, 0, 0);
+                cur_address += 4;
+            }
+            else{
+                eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 1, 0, 's', num_of_reg, 0);
+                num_of_reg++;
+                if (appear_cnt[var->var_type][var->var_id] == overall_cnt[11]){
+                    same_rank--;
+                }
+            }
+        }
+    #else
+
     for (eeyore_vars* var = function->vars; var != NULL; var = var->next){
         if (var->option == EEY_VAR_ARRAY){
             eey_new_tab(&context->symtab.local_var[var->var_type][var->var_id], 0, cur_address >> 2, 0, 0, 1);
@@ -238,6 +307,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
             num_of_reg++;
         }
     }
+    #endif
     
     fprintf(fout, "f_%s [%d] [%d]\n", function->func_name, function->param_cnt, (cur_address >> 2) + num_of_reg);
     // caller saved
