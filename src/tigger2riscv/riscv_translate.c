@@ -223,6 +223,12 @@ static void riscv_output(FILE* fout, char* code){
             case 'c':{
                 // call
                 sscanf(buffer, "%s %s", words[0], words[1]);
+                if (strcmp(words[1], "f_starttime") == 0){
+                    sprintf(words[1], "f__sysy_starttime");
+                }
+                else if (strcmp(words[1], "f_stoptime") == 0){
+                    sprintf(words[1], "f__sysy_stoptime");
+                }
                 fprintf(fout, "call %s\n", words[1] + 2);
                 break;
             }
@@ -300,7 +306,7 @@ static void riscv_output(FILE* fout, char* code){
                         fprintf(fout, "seqz %s, %s\n", words[0], words[1] + 1);
                     }
                     else if (words[1][0] == '-'){
-                        fprintf(fout, "neq %s, %s\n", words[0], words[1] + 1);
+                        fprintf(fout, "neg %s, %s\n", words[0], words[1] + 1);
                     }
                     else{
                         fprintf(fout, "mv %s, %s\n", words[0], words[1]);
