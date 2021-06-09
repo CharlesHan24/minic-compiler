@@ -362,7 +362,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                         fprintf(fout, "s0 = %s\n", buffer[0]);
                         sprintf(buffer[0], "s0");
                     }
-                    tigger_store_array(fout, instruct->vars[0], context, "s0");
+                    tigger_store_array(fout, instruct->vars[0], context, buffer[0]);
                 }
             }
         }
