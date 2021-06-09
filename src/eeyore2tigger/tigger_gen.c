@@ -86,7 +86,7 @@ static int tigger_load_array(FILE* fout, eeyore_vars* var, eeyore_context* conte
         tigger_load_var(fout, &tmp_var, context, "s11", tmp_result);
     }
     if (context->symtab.max_localvar_id > var->var_id){
-        if (context->symtab.local_var[var->var_type][var->var_id].is_array == 0){
+        if ((context->symtab.local_var[var->var_type][var->var_id].is_array == 0) && (var->var_type != 2)){
             if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
                 fprintf(fout, "load %d %s\n", context->symtab.local_var[var->var_type][var->var_id].address, assigned_reg);
                 return 1;
@@ -96,9 +96,21 @@ static int tigger_load_array(FILE* fout, eeyore_vars* var, eeyore_context* conte
                 return 1;
             }
         }
-        if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
+        if (context->symtab.local_var[var->var_type][var->var_id].is_reg >= 0){
+            if (context->symtab.local_var[var->var_type][var->var_id].is_reg){
+                if (var->length == -1){
+                    fprintf(fout, "s10 = a%d\n", var->var_id);
+                    fprintf(fout, "%s = %s + s10\n", assigned_reg, tmp_result);
+                }
+                else{
+                    fprintf(fout, "s10 = a%d\n", var->var_id);
+                    fprintf(fout, "%s = s10 + %d\n", assigned_reg, var->length);
+                }
+                return 1;
+            }
             if (var->length == -1){
-                fprintf(fout, "%s = %s + %d\n", assigned_reg, tmp_result, context->symtab.local_var[var->var_type][var->var_id].address);
+                fprintf(fout, "loadaddr %d s10\n", context->symtab.local_var[var->var_type][var->var_id].address);
+                fprintf(fout, "%s = %s + s10\n", assigned_reg, tmp_result);
                 return 1;
             }
             else{
@@ -137,7 +149,7 @@ static void tigger_store_array(FILE* fout, eeyore_vars* var, eeyore_context* con
         tigger_load_var(fout, &tmp_var, context, "s11", tmp_result);
     }
     if (context->symtab.max_localvar_id > var->var_id){
-        if (context->symtab.local_var[var->var_type][var->var_id].is_array == 0){
+        if ((context->symtab.local_var[var->var_type][var->var_id].is_array == 0) && (var->var_type != 2)){
             if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
                 fprintf(fout, "load %d s11\n", context->symtab.local_var[var->var_type][var->var_id].address);
                 fprintf(fout, "s11[0] = %s\n", assigned_reg);
@@ -147,9 +159,23 @@ static void tigger_store_array(FILE* fout, eeyore_vars* var, eeyore_context* con
             }
             return;
         }
-        if (context->symtab.local_var[var->var_type][var->var_id].is_reg == 0){
+        if (context->symtab.local_var[var->var_type][var->var_id].is_reg >= 0){
+            if (context->symtab.local_var[var->var_type][var->var_id].is_reg){
+                if (var->length == -1){
+                    fprintf(fout, "s10 = a%d\n", var->var_id);
+                    fprintf(fout, "s11 = %s + s10\n", tmp_result);
+                    fprintf(fout, "s11[0] = %s\n", assigned_reg);
+                }
+                else{
+                    fprintf(fout, "s10 = a%d\n", var->var_id);
+                    fprintf(fout, "s11 = s10 + %d\n", var->length);
+                    fprintf(fout, "s11[0] = %s\n", assigned_reg);
+                }
+                return;
+            }
             if (var->length == -1){
-                fprintf(fout, "s11 = %s + %d\n", tmp_result, context->symtab.local_var[var->var_type][var->var_id].address);
+                fprintf(fout, "loadaddr %d s10\n", context->symtab.local_var[var->var_type][var->var_id].address);
+                fprintf(fout, "s11 = %s + s10\n", tmp_result);
                 fprintf(fout, "s11[0] = %s\n", assigned_reg);
             }
             else{
@@ -190,7 +216,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
 
     // register allocation
     int num_of_reg = 0;
-    int cur_address = 0;
+    int cur_address = 32;
     int param_id = 0;
     char buffer[3][BUFFER_LEN];
 
@@ -251,19 +277,24 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                 break;
             }
             case EEY_PARAM:{
-                sprintf(buffer[1], "a%d", param_id++);
+                sprintf(buffer[1], "a%d", param_id);
+                fprintf(fout, "store %s %d\n", buffer[1], param_id);
                 tigger_load_var(fout, instruct->vars[0], context, buffer[1], buffer[0]);
                 if (strcmp(buffer[0], buffer[1]) != 0){
                     fprintf(fout, "%s = %s\n", buffer[1], buffer[0]);
                 }
+                param_id++;
                 break;
             }
             case EEY_FUNC_CALL:{
-                param_id = 0;
                 fprintf(fout, "call %s\n", instruct->func_call_name);
                 if (instruct->vars[0] != NULL){
                     tigger_store_var(fout, instruct->vars[0], context, "a0");
                 }
+                for (int i = 0; i < param_id; i++){
+                    fprintf(fout, "load %d a%d\n", i, i);
+                }
+                param_id = 0;
                 break;
             }
             case EEY_EXP:{
@@ -315,7 +346,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                     else{
                         fprintf(fout, "%s = s1\n", buffer[1]);
                     }
-                    tigger_store_var(fout, instruct->vars[0], context, buffer[2]);
+                    tigger_store_var(fout, instruct->vars[0], context, buffer[1]);
                 }
                 else{
                     tigger_load_var(fout, instruct->vars[1], context, "s0", buffer[0]);
