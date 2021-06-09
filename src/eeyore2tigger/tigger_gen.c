@@ -383,7 +383,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                 if (instruct->option == EEY_ASSIGN){
                     tigger_load_var(fout, instruct->vars[1], context, "t0", buffer[0]);
                     if (!tigger_reg(fout, instruct->vars[0], context, buffer[1])){
-                        sprintf(buffer[1], "s2");
+                        sprintf(buffer[1], "t2");
                     }
                     fprintf(fout, "%s = %s\n", buffer[1], buffer[0]);
                     tigger_store_var(fout, instruct->vars[0], context, buffer[1], 0);
@@ -391,7 +391,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                 else if (instruct->option == EEY_SG_OP){
                     tigger_load_var(fout, instruct->vars[1], context, "t0", buffer[0]);
                     if (!tigger_reg(fout, instruct->vars[0], context, buffer[1])){
-                        sprintf(buffer[1], "s2");
+                        sprintf(buffer[1], "t2");
                     }
                     if ((instruct->arith[0] == '!') && (is_digit(buffer[0][0]))){
                         fprintf(fout, "%s = %d\n", buffer[1], !(atoi(buffer[0])));
@@ -411,7 +411,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                     }
 
                     if (!tigger_reg(fout, instruct->vars[0], context, buffer[2])){
-                        sprintf(buffer[2], "s2");
+                        sprintf(buffer[2], "t2");
                     }
 
                     fprintf(fout, "%s = %s %s %s\n", buffer[2], buffer[0], instruct->arith, buffer[1]);
@@ -419,7 +419,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                 }
                 else if (instruct->option == EEY_LOAD){
                     if (!tigger_reg(fout, instruct->vars[0], context, buffer[1])){
-                        sprintf(buffer[1], "s2");
+                        sprintf(buffer[1], "t2");
                     }
                     int res = tigger_load_array(fout, instruct->vars[1], context, "t1");
                     if (res){
