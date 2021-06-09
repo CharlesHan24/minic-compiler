@@ -11,14 +11,15 @@ for src_file in src:
         continue
     os.system("./main -S -t %s -o ../../data/example.t" % src_file)
     print(src_file)
+    # pdb.set_trace()
     print("")
     prefix = src_file[:-2]
     inp_name = prefix + "in"
     if inp_name in file_all:
-        ret_code = os.system("./minivm ../../data/example.t < %s > ../../data/example.out" % inp_name)
+        ret_code = os.system("./minivm -t ../../data/example.t < %s > ../../data/example.out" % inp_name)
     
     else:
-        ret_code = os.system("./minivm ../../data/example.t > ../../data/example.out")
+        ret_code = os.system("./minivm -t ../../data/example.t > ../../data/example.out")
 
     #pdb.set_trace()
     ret_code = ret_code >> 8

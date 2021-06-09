@@ -71,7 +71,7 @@ int delete_insert_key(char* name){
             free(tmp);
 
             if (cur_node->count == 0){
-                for (Hash_Bucket* tmp_node = hash_table[hash_val]; tmp_node != NULL; tmp_node = cur_node->next){
+                for (Hash_Bucket* tmp_node = hash_table[hash_val]; tmp_node != NULL; tmp_node = tmp_node->next){
                     if (tmp_node->next == cur_node){
                         tmp_node->next = cur_node->next;
                         free(cur_node->name);
