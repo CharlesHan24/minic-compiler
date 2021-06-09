@@ -652,7 +652,7 @@ void dfs_declaration(Syntax_Tree* root, int is_declare, int is_fparam){
             cur_var->is_single = 1;
         }
     }
-    if ((root->node_type == TP_TOKEN) && (root->token_type == TOK_IDENT) && (!is_fparam)){
+    if ((root->node_type == TP_TOKEN) && (root->token_type == TOK_IDENT)){// && (!is_fparam)){
         Var_Attrib* cur_var;
         if (root->var_prefix == 'p'){
             cur_var = &param_attrib[root->fake_id];

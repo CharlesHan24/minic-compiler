@@ -9,7 +9,6 @@
 #include <stdint.h>
 
 #define DEBUG_MODE
-
 int parse_args(int argc, char* argv[], FILE** fin, FILE** fout, char** fout_name){
     int opt = 0;
     static struct option long_options[] = {
