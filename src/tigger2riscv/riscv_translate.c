@@ -6,6 +6,7 @@
 #include <malloc.h>
 
 #define BUFFER_LEN 1000
+#define IS_TIGGER_OPTIMIZE
 
 const char helper_reg[5] = "t3";
 
@@ -321,10 +322,56 @@ static void riscv_output(FILE* fout, char* code){
     }
 }
 
+static void tigger_optimize(FILE* fout, char* code){
+    char buffer[BUFFER_LEN];
+    char old_buffer[BUFFER_LEN];
+    memset(buffer, 0, sizeof(buffer));
+    memset(old_buffer, 0, sizeof(old_buffer));
+    char words[10][BUFFER_LEN];
+    char* ed_line;
+
+    int stk_val;
+
+    while ((ed_line = strchr(code, '\n')) != NULL){
+        int tmp_len = strlen(buffer);
+        memset(buffer, 0, tmp_len);
+        strncpy(buffer, code, ed_line - code + 1);
+        buffer[ed_line - code + 1] = 0;
+        code = ed_line + 1;
+
+        int cnt;
+        int flag = 0;
+        cnt = sscanf(buffer, "load %s %s", words[0], words[1]);
+        if (cnt == 2){
+            cnt = sscanf(old_buffer, "store %s %s", words[2], words[3]);
+            if (cnt == 2){
+                if (strcmp(words[3], words[0]) == 0){
+                    flag = 1;
+                    fprintf(fout, "%s = %s\n", words[1], words[2]);
+                }
+            }
+        }
+        if (!flag){
+            fprintf(fout, "%s", buffer);
+        }
+
+        strcpy(old_buffer, buffer);
+    }
+}
+
 void tigger2riscv_translate(char* fin_name, char* fout_name){
     char* code;
     tigger_readin(fin_name, &code);
     FILE* fout = fopen(fout_name, "w");
+
+    #ifdef IS_TIGGER_OPTIMIZE
+        tigger_optimize(fout, code);
+        fflush(fout);
+        fclose(fout);
+        tigger_readin(fout_name, &code);
+        fout = fopen(fout_name, "w");
+    #endif
+
     riscv_output(fout, code);
     fflush(fout);
     fclose(fout);
