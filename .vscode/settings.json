@@ -5,6 +5,10 @@
         "hash_map": "c",
         "hash_set": "c",
         "string_view": "c",
-        "y.tab.h": "c"
+        "y.tab.h": "c",
+        "cstdio": "c",
+        "*.tcc": "c",
+        "functional": "c",
+        "regex": "c"
     }
 }
