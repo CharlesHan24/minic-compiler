@@ -260,7 +260,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
         //printf("%d %d\n", overall_cnt[0], overall_cnt[11]);
 
         int same_rank = 0;
-        if (top >= 11){
+        if (top > 11){
             for (int i = 11; i; i--){
                 if (overall_cnt[i] > overall_cnt[11]){
                     same_rank = 11 - i;

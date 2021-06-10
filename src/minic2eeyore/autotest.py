@@ -28,5 +28,5 @@ for src_file in src:
     fout.close()
     oup_name = prefix + "out"
     os.system("diff  -w ../../data/example.out %s" % oup_name)
-    time.sleep(0.00001)
+    time.sleep(0.1)
         
