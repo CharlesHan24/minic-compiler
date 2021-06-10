@@ -211,8 +211,12 @@ static void tigger_store_array(FILE* fout, eeyore_vars* var, eeyore_context* con
 static int comp(const void * elem1, const void * elem2) {
     int f = *((int*)elem1);
     int s = *((int*)elem2);
-    if (f > s) return  -1;
-    if (f < s) return 1;
+    if (f > s){
+        return -1;
+    }
+    if (f < s){
+        return 1;
+    }
     return 0;
 }
 
@@ -249,7 +253,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
                 }
             }
         }
-        int* overall_cnt = calloc(max(12, function->max_var_id * 3), 4);
+        int* overall_cnt = calloc(max(15, function->max_var_id * 3), 4);
         int top = 0;
         for (eeyore_vars* var = function->vars; var != NULL; var = var->next){
             if (var->option != EEY_VAR_ARRAY){
@@ -261,7 +265,7 @@ static void tigger_gen_func(eeyore_function* function, eeyore_context* context, 
 
         int same_rank = 0;
         if (top > 11){
-            for (int i = 11; i; i--){
+            for (int i = 11; i >= 0; i--){
                 if (overall_cnt[i] > overall_cnt[11]){
                     same_rank = 11 - i;
                     break;
